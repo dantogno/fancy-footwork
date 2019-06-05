@@ -28,8 +28,8 @@ public class CameraFlash : MonoBehaviour
     //whether or not to show layer
     private bool showFootSteps = false;
 
-    enum FlashState { Ready, Flash, Fading, Winding};
-    private FlashState currentState;
+    public enum FlashState { Ready, Flash, Fading, Winding};
+    public FlashState currentFlashState;
 
     private void Awake()
     {
@@ -50,7 +50,7 @@ public class CameraFlash : MonoBehaviour
         if (flashObject == null)
             flashObject = GameObject.FindGameObjectWithTag("CameraFlash").GetComponent<Light>();
         //set intial flash state
-        currentState = FlashState.Ready;
+        currentFlashState = FlashState.Ready;
     }
 
     // Update is called once per frame
@@ -63,22 +63,22 @@ public class CameraFlash : MonoBehaviour
         {
             //if the camera is ready to go off again then change state
             //and call appropriate method
-            if (currentState == FlashState.Ready)
+            if (currentFlashState == FlashState.Ready)
             {
-                currentState = FlashState.Flash;
+                currentFlashState = FlashState.Flash;
                 showFootSteps = true;
                 MakeCameraFlash();
             }
         }
-        if(currentState==FlashState.Flash)
+        if(currentFlashState==FlashState.Flash)
         {
             MakeCameraFlash();
         }
-        else if(currentState==FlashState.Fading)
+        else if(currentFlashState==FlashState.Fading)
         {
             MakeFlashDisipate();
         }
-        else if(currentState==FlashState.Winding)
+        else if(currentFlashState==FlashState.Winding)
         {
             WindCameraUp();
         }
@@ -104,7 +104,7 @@ public class CameraFlash : MonoBehaviour
         else
         {
             //set to next state and reset the time passed
-            currentState = FlashState.Fading;
+            currentFlashState = FlashState.Fading;
             secondsPast = 0;
         }
     }
@@ -136,7 +136,7 @@ public class CameraFlash : MonoBehaviour
             previousTime = 0;
             showFootSteps = false;
             //set the next state
-            currentState = FlashState.Winding;
+            currentFlashState = FlashState.Winding;
         }
     }
 
@@ -174,7 +174,7 @@ public class CameraFlash : MonoBehaviour
             //To-Do: Play Sound here
 
             //set the next state
-            currentState = FlashState.Ready;
+            currentFlashState = FlashState.Ready;
             //reset the values
             clicks = 0;
             clicked = false;
