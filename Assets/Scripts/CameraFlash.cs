@@ -25,6 +25,9 @@ public class CameraFlash : MonoBehaviour
     //the light object for the flash
     public Light flashObject;
 
+    //whether or not to show layer
+    private bool showFootSteps = false;
+
     enum FlashState { Ready, Flash, Fading, Winding};
     private FlashState currentState;
 
@@ -63,6 +66,7 @@ public class CameraFlash : MonoBehaviour
             if (currentState == FlashState.Ready)
             {
                 currentState = FlashState.Flash;
+                showFootSteps = true;
                 MakeCameraFlash();
             }
         }
@@ -78,6 +82,9 @@ public class CameraFlash : MonoBehaviour
         {
             WindCameraUp();
         }
+        //show foot steps
+        if (showFootSteps)
+            Camera.main.cullingMask |= 1 << LayerMask.NameToLayer("FootSteps");
     }
 
     private float secondsPast = 0;
@@ -122,9 +129,12 @@ public class CameraFlash : MonoBehaviour
         else
         {
             //reset everything
+            //make the foot steps disappear
+            Camera.main.cullingMask &= ~(1 << LayerMask.NameToLayer("FootSteps"));
             flashObject.intensity = 0;
             secondsPast = 0;
             previousTime = 0;
+            showFootSteps = false;
             //set the next state
             currentState = FlashState.Winding;
         }

@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flashExposureTime: 1.5
-  cameraWindClicks: 5
+  cameraWindClicks: 20
   flashWindDown: 3
   decreaseFlashAmount: 0.2
   lightFadeTimeFrequence: 0.1
