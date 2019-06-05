@@ -130,8 +130,44 @@ public class CameraFlash : MonoBehaviour
         }
     }
 
+
+    private float clicks = 0;
+    private bool clicked = false;
     private void WindCameraUp()
     {
+        //get the scroll wheel delta value
+        float scrollWheel = Input.GetAxis("Mouse ScrollWheel");
+        //if scrolling up increase the amount of clicks
+        if(scrollWheel>0)
+        {
+            //if not clicked and less than set amount
+            if(!clicked && clicks<cameraWindClicks)
+            {
+                //set clicked
+                clicked = true;
+                //increase click amount
+                clicks += 1;
+                print(clicks);
+            }
+        }
+        //if no longer scrolling up, reset the values
+        else if(scrollWheel<=0)
+        {
+            if(clicked)
+            {
+                clicked = false;
+            }
+        }
+        //if wound up then reset
+        if(clicks>=cameraWindClicks)
+        {
+            //To-Do: Play Sound here
 
+            //set the next state
+            currentState = FlashState.Ready;
+            //reset the values
+            clicks = 0;
+            clicked = false;
+        }
     }
 }
