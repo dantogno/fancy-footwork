@@ -6,8 +6,6 @@ public class CameraFlash : MonoBehaviour
 {
     //the intensity of the camera flash
     private float flashIntensity;
-    //the light object for the flash
-    public Light flashObject;
 
     //the amount of time the flash lasts
     public float flashExposureTime = 2;
@@ -18,15 +16,122 @@ public class CameraFlash : MonoBehaviour
     //flash cool down
     public float flashWindDown = 3;
 
+    //Amount to decrease flash overtime by
+    public float decreaseFlashAmount=.5f;
+
+    //Frequency to turn decrease light, no more than 1
+    public float lightFadeTimeFrequence = .5f;
+
+    //the light object for the flash
+    public Light flashObject;
+
+    enum FlashState { Ready, Flash, Fading, Winding};
+    private FlashState currentState;
+
+    private void Awake()
+    {
+        //null check, makes sure the object is found
+        if (flashObject == null)
+            print("Set Flash Object");
+        else if (GameObject.FindGameObjectWithTag("CameraFlash") == null)
+            print("Set Tag of Object");
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        //set intial intensity
+        flashIntensity = flashObject.intensity;
+        flashObject.intensity = 0;
+        //if object is not set, then find it
+        if (flashObject == null)
+            flashObject = GameObject.FindGameObjectWithTag("CameraFlash").GetComponent<Light>();
+        //set intial flash state
+        currentState = FlashState.Ready;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        //Get the input from the left mouse button
+        float leftButton = Input.GetAxis("Fire1");
+        //check to see if pressed
+        if(leftButton!=0)
+        {
+            //if the camera is ready to go off again then change state
+            //and call appropriate method
+            if (currentState == FlashState.Ready)
+            {
+                currentState = FlashState.Flash;
+                MakeCameraFlash();
+            }
+        }
+        if(currentState==FlashState.Flash)
+        {
+            MakeCameraFlash();
+        }
+        else if(currentState==FlashState.Fading)
+        {
+            MakeFlashDisipate();
+        }
+        else if(currentState==FlashState.Winding)
+        {
+            WindCameraUp();
+        }
+    }
+
+    private float secondsPast = 0;
+    private float previousTime = 0;
+    //Have the camera flash for a specified time
+    private void MakeCameraFlash()
+    {
+        //check how long the flash has lasted
+        if (secondsPast <= flashExposureTime)
+        {
+            //set intensity of light to the specified one
+            if (flashObject.intensity != flashIntensity)
+                flashObject.intensity = flashIntensity;
+            //increase the time passed
+            secondsPast += Time.deltaTime; 
+        }
+        else
+        {
+            //set to next state and reset the time passed
+            currentState = FlashState.Fading;
+            secondsPast = 0;
+        }
+    }
+
+    //decrease the intensity of the light all the way to zero
+    private void MakeFlashDisipate()
+    {
+        //if time past doesn't equal fade time and the intensity isn't already 0
+        if (secondsPast != flashWindDown && flashObject.intensity != 0)
+        {
+            //increase time passed
+            secondsPast += Time.deltaTime;
+            //if greater than the previous time by set value 
+            if (secondsPast >= (previousTime + lightFadeTimeFrequence))
+            {
+                //set the previous time to the new one
+                previousTime = secondsPast;
+                //decrease intensity by set amount
+                flashObject.intensity -= decreaseFlashAmount;
+            }
+        }
+        else
+        {
+            //reset everything
+            flashObject.intensity = 0;
+            secondsPast = 0;
+            previousTime = 0;
+            //set the next state
+            currentState = FlashState.Winding;
+        }
+    }
+
+    private void WindCameraUp()
+    {
+
     }
 }
