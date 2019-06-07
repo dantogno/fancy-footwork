@@ -23,7 +23,7 @@ public class CameraFlash : MonoBehaviour
     public float lightFadeTimeFrequence = .5f;
 
     //the light object for the flash
-    public Light flashObject;
+    public Light flashObject = null;
 
     //whether or not to show layer
     private bool showFootSteps = false;

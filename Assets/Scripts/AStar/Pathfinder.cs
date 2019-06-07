@@ -12,16 +12,28 @@ public class Pathfinder : MonoBehaviour
     //the grid reference
     Grid grid;
 
+    public static bool calculatePath = false;
+
     void Awake()
     {
         //get the grid
         grid = GetComponent<Grid>();
     }
 
-    void Update()
+    private void Start()
     {
         //calculate the path
         FindPath(agent.position, target.position);
+    }
+
+    void Update()
+    {
+        if (calculatePath)
+        {
+            calculatePath = false;
+            //calculate the path
+            FindPath(agent.position, target.position);
+        }
     }
 
     //find the path based on the current position of the agent and the position of the current goal
