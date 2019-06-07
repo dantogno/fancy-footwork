@@ -25,6 +25,12 @@ public class CameraFlash : MonoBehaviour
     //the light object for the flash
     public Light flashObject = null;
 
+    public AudioSource audioSource;
+
+    public AudioClip wind;
+    public AudioClip flash;
+    private bool playedFlash = false;
+
     //whether or not to show layer
     private bool showFootSteps = false;
 
@@ -51,6 +57,7 @@ public class CameraFlash : MonoBehaviour
             flashObject = GameObject.FindGameObjectWithTag("CameraFlash").GetComponent<Light>();
         //set intial flash state
         currentFlashState = FlashState.Ready;
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -95,6 +102,11 @@ public class CameraFlash : MonoBehaviour
         //check how long the flash has lasted
         if (secondsPast <= flashExposureTime)
         {
+            if(!playedFlash)
+            {
+                playedFlash = true;
+                audioSource.PlayOneShot(flash);
+            }
             //set intensity of light to the specified one
             if (flashObject.intensity != flashIntensity)
                 flashObject.intensity = flashIntensity;
@@ -105,6 +117,7 @@ public class CameraFlash : MonoBehaviour
         {
             //set to next state and reset the time passed
             currentFlashState = FlashState.Fading;
+            playedFlash = false;
             secondsPast = 0;
         }
     }
@@ -157,6 +170,7 @@ public class CameraFlash : MonoBehaviour
                 clicked = true;
                 //increase click amount
                 clicks += 1;
+                audioSource.PlayOneShot(wind);
                 print(clicks);
             }
         }

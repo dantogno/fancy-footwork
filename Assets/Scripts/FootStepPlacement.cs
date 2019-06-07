@@ -13,12 +13,12 @@ public class FootStepPlacement : MonoBehaviour
     private bool notPlaced = true;
 
     //the time between each step placement
-    public float secondsBetweenSteps = .25f;
+    public float secondsBetweenSteps = .1f;
 
     //player object
     public GameObject player=null;
 
-    private bool canPlace = true;
+    public AudioSource audioSource;
 
     //node to start at
     int startingNode = 0;
@@ -29,32 +29,15 @@ public class FootStepPlacement : MonoBehaviour
             player = GameObject.FindGameObjectWithTag("Player");
         //get grid
         grid = GetComponent<Grid>();
+        audioSource = GetComponent<AudioSource>();
+        StartCoroutine(PlaceSteps());
     }
 
     // Update is called once per frame
     void Update()
     {
         //if they have not been placed
-        if (notPlaced)
-        {
-            //set it to be placed
-            notPlaced = false;
-
-            //Place steps
-            //count of how many have been placed starting at 0
-            int index = 0;
-            //place each game object to the correct spot
-            foreach (GameObject f in footSteps)
-            {
-                if (startingNode + index < (grid.path.Count - 1))
-                    //get the world position of the grid node
-                    f.transform.position = grid.path[startingNode + index].worldPosition;
-
-                //increase the index
-                index++;
-            }
-        }
-        else
+        if (!notPlaced)
         {
             //check is the player has passed the last foot step object
             CheckPlayerPosition();
@@ -70,8 +53,35 @@ public class FootStepPlacement : MonoBehaviour
             {
                 startingNode += 4;
                 notPlaced = true;
+                StartCoroutine(PlaySound());
             }
         }
+    }
+
+    IEnumerator PlaySound()
+    {
+        audioSource.Play();
+        yield return new WaitForSeconds(1);
+        StartCoroutine(PlaceSteps());
+    }
+
+    IEnumerator PlaceSteps()
+    {
+        //Place steps
+        //count of how many have been placed starting at 0
+        int index = 0;
+        //place each game object to the correct spot
+        foreach (GameObject f in footSteps)
+        {
+            if (startingNode + index < (grid.path.Count - 1))
+                //get the world position of the grid node
+                f.transform.position = grid.path[startingNode + index].worldPosition;
+            //increase the index
+            index++;
+            yield return new WaitForSeconds(secondsBetweenSteps);
+        }
+        //set it to be placed
+        notPlaced = false;
     }
 
 }
