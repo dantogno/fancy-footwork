@@ -58,6 +58,7 @@ public class FootStepPlacement : MonoBehaviour
         }
     }
 
+    //play the foot step sounds
     IEnumerator PlaySound()
     {
         audioSource.Play();
