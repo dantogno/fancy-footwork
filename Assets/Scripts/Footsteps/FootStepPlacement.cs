@@ -36,13 +36,15 @@ public class FootStepPlacement : MonoBehaviour
             StartCoroutine(InitialPlacement());
     }
 
-
+    //if the path is null at first, keep going until not null then place steps
     IEnumerator InitialPlacement()
     {
+        //ever .15 seconds check to see if null
         while (grid.path == null)
         {
             yield return new WaitForSeconds(.15f);
         }
+        //place steps
         StartCoroutine(PlaceSteps());
     }
 
