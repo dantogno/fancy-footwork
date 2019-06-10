@@ -30,6 +30,19 @@ public class FootStepPlacement : MonoBehaviour
         //get grid
         grid = GetComponent<Grid>();
         audioSource = GetComponent<AudioSource>();
+        if (grid.path != null)
+            StartCoroutine(PlaceSteps());
+        else
+            StartCoroutine(InitialPlacement());
+    }
+
+
+    IEnumerator InitialPlacement()
+    {
+        while (grid.path == null)
+        {
+            yield return new WaitForSeconds(.15f);
+        }
         StartCoroutine(PlaceSteps());
     }
 
@@ -39,8 +52,9 @@ public class FootStepPlacement : MonoBehaviour
         //if they have not been placed
         if (!notPlaced)
         {
-            //check is the player has passed the last foot step object
-            CheckPlayerPosition();
+            if (grid.path != null)
+                //check is the player has passed the last foot step object
+                CheckPlayerPosition();
         }
     }
 
