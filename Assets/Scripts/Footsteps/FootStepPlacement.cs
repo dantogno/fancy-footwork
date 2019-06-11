@@ -6,6 +6,7 @@ public class FootStepPlacement : MonoBehaviour
 {
     //footstep game objects
     public List<GameObject> footSteps;
+
     //the grid in the scene
     private Grid grid;
 
@@ -19,6 +20,10 @@ public class FootStepPlacement : MonoBehaviour
     public GameObject player=null;
 
     public AudioSource audioSource;
+
+    List<Node> previousPath;
+
+    bool canPlace = true;
 
     //node to start at
     int startingNode = 0;
@@ -44,8 +49,13 @@ public class FootStepPlacement : MonoBehaviour
         {
             yield return new WaitForSeconds(.15f);
         }
-        //place steps
-        StartCoroutine(PlaceSteps());
+        if (previousPath != grid.path)
+        {
+            previousPath = grid.path;
+            startingNode = 0;
+            //place steps
+            StartCoroutine(PlaceSteps());
+        }
     }
 
     // Update is called once per frame
@@ -58,6 +68,13 @@ public class FootStepPlacement : MonoBehaviour
                 //check is the player has passed the last foot step object
                 CheckPlayerPosition();
         }
+        if (Vector3.Distance(player.transform.position, grid.path[grid.path.Count - 1].worldPosition) < 4)
+        {
+            canPlace = false;
+            grid.path = null;
+            Pathfinder.calculatePath = true;
+            StartCoroutine(InitialPlacement());
+        }
     }
 
     void CheckPlayerPosition()
@@ -67,9 +84,13 @@ public class FootStepPlacement : MonoBehaviour
         {
             if ((startingNode + 4) < (grid.path.Count - 5))
             {
-                startingNode += 4;
-                notPlaced = true;
-                StartCoroutine(PlaySound());
+                if (canPlace)
+                {
+                    canPlace = false;
+                    startingNode += 4;
+                    notPlaced = true;
+                    StartCoroutine(PlaySound());
+                }
             }
         }
     }
@@ -99,6 +120,7 @@ public class FootStepPlacement : MonoBehaviour
         }
         //set it to be placed
         notPlaced = false;
+        canPlace = true;
     }
 
 }
