@@ -8,6 +8,8 @@ public class Interactable : MonoBehaviour,IInteract
     public bool triggered { get; set; }
     public InteractionEnum interationType { get; set; }
 
+    public InteractionEnum interactionType;
+
     private Renderer render;
     private Color originalColor;
 
