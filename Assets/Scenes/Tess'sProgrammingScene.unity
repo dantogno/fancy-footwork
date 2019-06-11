@@ -555,7 +555,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2000000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 2359
+      value: 3383
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
@@ -1046,6 +1046,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 618b5ddd20b9bd1488d4904a904c86f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactionType: 0
 --- !u!1001 &4791654272846818245
 PrefabInstance:
   m_ObjectHideFlags: 0

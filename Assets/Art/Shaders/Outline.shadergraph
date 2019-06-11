@@ -4,13 +4,13 @@
             "typeInfo": {
                 "fullName": "UnityEditor.ShaderGraph.ColorShaderProperty"
             },
-            "JSONnodeData": "{\n    \"m_Name\": \"EmmisionColor\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"d44a0957-0243-46ab-bc4d-f0240e785229\"\n    },\n    \"m_DefaultReferenceName\": \"Color_47E45653\",\n    \"m_OverrideReferenceName\": \"_EmissionColor\",\n    \"m_Value\": {\n        \"r\": 0.0,\n        \"g\": 0.19215679168701173,\n        \"b\": 1.0,\n        \"a\": 0.0\n    },\n    \"m_ColorMode\": 0,\n    \"m_Hidden\": false\n}"
+            "JSONnodeData": "{\n    \"m_Name\": \"EmmisionColor\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"d44a0957-0243-46ab-bc4d-f0240e785229\"\n    },\n    \"m_DefaultReferenceName\": \"Color_47E45653\",\n    \"m_OverrideReferenceName\": \"_EmissionColor\",\n    \"m_Value\": {\n        \"r\": 0.0,\n        \"g\": 0.17482270300388337,\n        \"b\": 0.9150943160057068,\n        \"a\": 0.0\n    },\n    \"m_ColorMode\": 0,\n    \"m_Hidden\": false\n}"
         },
         {
             "typeInfo": {
                 "fullName": "UnityEditor.ShaderGraph.Vector1ShaderProperty"
             },
-            "JSONnodeData": "{\n    \"m_Name\": \"EmmissionAmount\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"e2a3a859-8d9a-46e0-89ed-88cd3f040189\"\n    },\n    \"m_DefaultReferenceName\": \"Vector1_547E43F8\",\n    \"m_OverrideReferenceName\": \"_Amount\",\n    \"m_Value\": 2.0,\n    \"m_FloatType\": 0,\n    \"m_RangeValues\": {\n        \"x\": 0.0,\n        \"y\": 1.0\n    },\n    \"m_Hidden\": false\n}"
+            "JSONnodeData": "{\n    \"m_Name\": \"EmmissionAmount\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"e2a3a859-8d9a-46e0-89ed-88cd3f040189\"\n    },\n    \"m_DefaultReferenceName\": \"Vector1_547E43F8\",\n    \"m_OverrideReferenceName\": \"_Amount\",\n    \"m_Value\": 5.0,\n    \"m_FloatType\": 0,\n    \"m_RangeValues\": {\n        \"x\": 0.0,\n        \"y\": 1.0\n    },\n    \"m_Hidden\": false\n}"
         }
     ],
     "m_GUID": {
