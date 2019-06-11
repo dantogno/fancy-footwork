@@ -13,6 +13,7 @@ public class Switch : MonoBehaviour
     Light lightObject;
     bool hasBeenActiviated = false;
     bool hasBeenCalled = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,8 +46,8 @@ public class Switch : MonoBehaviour
     {
         switch(typeOfSwitch)
         {
-            case SwitchTypes.slidingDoor_WallTrigger:
-                SlideDoor_Wall();
+            case SwitchTypes.playerUnLockedDoor:
+                OpenDoor();
                 break;
             case SwitchTypes.Light:
                 TurnLightOn_Off();
@@ -79,9 +80,10 @@ public class Switch : MonoBehaviour
 
     }
 
-    private void SlideDoor_Wall()
+    private void OpenDoor()
     {
-
+        //objectToEffect.GetComponent<HingeJoint>().limits=;
+        objectToEffect.GetComponent<Rigidbody>().AddForce(10,0,0);
     }
 
 }
@@ -90,5 +92,5 @@ public enum SwitchTypes
 {
     Light,
     Button,
-    slidingDoor_WallTrigger
+    playerUnLockedDoor,
 }
