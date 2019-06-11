@@ -8,7 +8,12 @@ public class Pathfinder : MonoBehaviour
     //the gameobject that is going to be moving
     public Transform agent;
     //the goal position
-    public Transform target;
+    //public Transform target;
+
+    public List<Transform> goalsInOrder;
+
+    private int index = 0;
+
     //the grid reference
     Grid grid;
 
@@ -22,8 +27,7 @@ public class Pathfinder : MonoBehaviour
 
     private void Start()
     {
-        //calculate the path
-        FindPath(agent.position, target.position);
+        CalculateThePath();
     }
 
     void Update()
@@ -32,8 +36,19 @@ public class Pathfinder : MonoBehaviour
         {
             calculatePath = false;
             //calculate the path
-            FindPath(agent.position, target.position);
+            CalculateThePath();
         }
+    }
+
+    void CalculateThePath()
+    {
+        if (index == 0)
+            //calculate the path
+            FindPath(agent.position, goalsInOrder[index].position);
+        else if(index<goalsInOrder.Count)
+            FindPath(goalsInOrder[index-1].position, goalsInOrder[index].position);
+        index++;
+
     }
 
     //find the path based on the current position of the agent and the position of the current goal
