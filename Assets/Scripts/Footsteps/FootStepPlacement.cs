@@ -68,12 +68,15 @@ public class FootStepPlacement : MonoBehaviour
                 //check is the player has passed the last foot step object
                 CheckPlayerPosition();
         }
-        if (Vector3.Distance(player.transform.position, grid.path[grid.path.Count - 1].worldPosition) < 4)
+        if (grid.path != null)
         {
-            canPlace = false;
-            grid.path = null;
-            Pathfinder.calculatePath = true;
-            StartCoroutine(InitialPlacement());
+            if (Vector3.Distance(player.transform.position, grid.path[grid.path.Count - 1].worldPosition) < 4)
+            {
+                canPlace = false;
+                grid.path = null;
+                Pathfinder.calculatePath = true;
+                StartCoroutine(InitialPlacement());
+            }
         }
     }
 

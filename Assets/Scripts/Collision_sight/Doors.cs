@@ -21,7 +21,10 @@ public class Doors : MonoBehaviour
     void Start()
     {
         interact = GetComponent<Interactable>();
-        objectToEffect = gameObject;
+        if (typeOfDoor != DoorTypes.PaintingLock)
+            objectToEffect = gameObject;
+        else
+            objectToEffect = paintingDoor;
         if (player == null)
             player = GameObject.FindGameObjectWithTag("Player");
         if (typeOfDoor == DoorTypes.PaintingDoor)
@@ -32,8 +35,8 @@ public class Doors : MonoBehaviour
         //    if (lightObject != null)
         //        lightObject.intensity = 0;
         //}
-        if (typeOfDoor != DoorTypes.PaintingLock)
-            objectToEffect.GetComponent<Rigidbody>().freezeRotation = true;
+
+        objectToEffect.GetComponent<Rigidbody>().freezeRotation = true;
     }
 
     // Update is called once per frame
@@ -49,7 +52,7 @@ public class Doors : MonoBehaviour
             hasBeenCalled = false;
         }
 
-        if (isRotating)
+        if (isRotating &&!hasRotated)
             RotatePainting();
         
     }
@@ -72,7 +75,7 @@ public class Doors : MonoBehaviour
                     OpenUnLockedDoor();
                 break;
             case DoorTypes.PaintingLock:
-                if (!isRotating)
+                if (!isRotating && !hasRotated)
                 {
                     isRotating = true;
                     RotatePainting();
@@ -101,12 +104,15 @@ public class Doors : MonoBehaviour
 
 
     private float timeForRotation = .1f;
+    private bool hasRotated = false;
     private void RotatePainting()
     {
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, (transform.rotation.ToEuler().y * (180 / Mathf.PI)), 0), timeForRotation);
         if (Mathf.RoundToInt(transform.rotation.ToEuler().x * (180 / Mathf.PI)) == 0 && Mathf.RoundToInt(transform.rotation.ToEuler().z * (180 / Mathf.PI)) == 0)
         {
-            paintingDoor.GetComponent<Doors>().isUnlocked = true;
+            hasRotated = true;
+            objectToEffect = paintingDoor;
+            OpenUnLockedDoor();
         }
         //Vector3 goToPosition = transform.position;
         //goToPosition.y= GameObject.FindGameObjectWithTag("Floor").transform.position.y+1;
@@ -123,12 +129,12 @@ public class Doors : MonoBehaviour
     {
         //objectToEffect.GetComponent<HingeJoint>().limits=;
         JointLimits limits = objectToEffect.GetComponent<HingeJoint>().limits;
-        limits.min = -10;
+        limits.min = -20;
         limits.max = 0;
         objectToEffect.GetComponent<HingeJoint>().limits = limits;
 
         objectToEffect.GetComponent<Rigidbody>().freezeRotation = false;
-        objectToEffect.GetComponent<Rigidbody>().AddForce(25, 0, 0);
+        objectToEffect.GetComponent<Rigidbody>().AddForce(50, 0, 0);
         StartCoroutine(ChangeMin());
     }
 
