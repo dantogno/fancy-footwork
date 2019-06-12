@@ -4,8 +4,8 @@ using UnityEngine;
 
 public enum InteractionEnum
 {
-    pickable,
-    trigger,
+    note,
+    phone,
     door,
 
 }
