@@ -29,6 +29,7 @@ public class CameraFlash : MonoBehaviour
 
     public AudioClip wind;
     public AudioClip flash;
+    public AudioClip finishWind;
     private bool playedFlash = false;
 
     //whether or not to show layer
@@ -190,6 +191,7 @@ public class CameraFlash : MonoBehaviour
             //set the next state
             currentFlashState = FlashState.Ready;
             //reset the values
+            audioSource.PlayOneShot(finishWind);
             clicks = 0;
             clicked = false;
         }
