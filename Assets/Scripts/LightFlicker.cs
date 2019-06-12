@@ -35,11 +35,12 @@ public class LightFlicker : MonoBehaviour
         timer = Random.Range(0.1f, secondsOnMax);
         yield return new WaitForSeconds(timer);
         light.intensity = 0.0f;
-        audioSource.PlayOneShot(lightOffClip);
+        audioSource.PlayOneShot(lightOffClip, 0.1f);
         timer = Random.Range(0.1f, secondsOffMax);
         yield return new WaitForSeconds(timer);
         light.intensity = startingLightIntensity;
-        audioSource.PlayOneShot(lightOnClip);
+
+        audioSource.PlayOneShot(lightOnClip, 0.1f);
         audioSource.PlayOneShot(lightHum);
         StartCoroutine(FlickeringLight());
     }
