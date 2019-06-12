@@ -60,9 +60,11 @@ public class PlayerSight : MonoBehaviour
                     //get the interactable script
                     IInteract interactType = hit.collider.gameObject.GetComponent<Interactable>();
                     //add to previous list
-                    lookedAt.Add(hit.collider.gameObject);
+                    if (!lookedAt.Contains(hit.collider.gameObject))
+                        lookedAt.Add(hit.collider.gameObject);
                     //add to current list
-                    objectsBeingLookedAt.Add(hit.collider.gameObject);
+                    if (!objectsBeingLookedAt.Contains(hit.collider.gameObject))
+                        objectsBeingLookedAt.Add(hit.collider.gameObject);
                     //if the object can be set then set looking at to true
                     if (interactType != null)
                     {
@@ -80,11 +82,13 @@ public class PlayerSight : MonoBehaviour
                     //get the interaction script of object
                     IInteract interactType = hit2.collider.gameObject.GetComponent<Interactable>();
                     //add to previous list
-                    lookedAt.Add(hit2.collider.gameObject);
+                    if (!lookedAt.Contains(hit2.collider.gameObject))
+                        lookedAt.Add(hit2.collider.gameObject);
                     //add to current list
-                    objectsBeingLookedAt.Add(hit2.collider.gameObject);
+                    if (!objectsBeingLookedAt.Contains(hit2.collider.gameObject))
+                        objectsBeingLookedAt.Add(hit2.collider.gameObject);
                     //if not null then set variable to true
-                    if(interactType!=null)
+                    if (interactType!=null)
                     {
                         interactType.lookingAt = true;
                     }
