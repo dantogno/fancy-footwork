@@ -1489,7 +1489,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   objectType: 0
-  objectToUseItemOn: {fileID: 0}
+  objectToUseItemOn: {fileID: 1087920033}
 --- !u!1001 &4791654272846818245
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -26,6 +26,10 @@ public class Switch : MonoBehaviour
             if (lightObject != null)
                 lightObject.intensity = 0;
         }
+        else if(typeOfSwitch == SwitchTypes.UnLockedDoor)
+        {
+            objectToEffect.GetComponent<Rigidbody>().freezeRotation = true;
+        }
     }
 
     // Update is called once per frame
@@ -46,14 +50,17 @@ public class Switch : MonoBehaviour
     {
         switch(typeOfSwitch)
         {
-            case SwitchTypes.playerUnLockedDoor:
-                OpenDoor();
+            case SwitchTypes.UnLockedDoor:
+                OpenUnLockedDoor();
                 break;
             case SwitchTypes.Light:
                 TurnLightOn_Off();
                 break;
-            case SwitchTypes.Button:
-                ToggleButton();
+            case SwitchTypes.LockedDoor:
+                UnLockLockedDoor();
+                break;
+            case SwitchTypes.SecretDoor:
+                UnLockLockedDoor();
                 break;
         }
     }
@@ -75,22 +82,49 @@ public class Switch : MonoBehaviour
         }
     }
 
-    private void ToggleButton()
+    private void UnLockLockedDoor()
     {
+        ObjectToPutInInventory keyItem = player.GetComponent<PlayerInventory>().inventory.Find(i => i.objectType == PickUpObjectEnum.Key);
+        if(keyItem.objectType== PickUpObjectEnum.Key)
+        {
+            player.GetComponent<PlayerInventory>().inventory.Remove(keyItem);
+            typeOfSwitch = SwitchTypes.UnLockedDoor;
+        }
 
     }
 
-    private void OpenDoor()
+    Vector3 previousPosition=Vector3.zero;
+    private void OpenUnLockedDoor()
     {
         //objectToEffect.GetComponent<HingeJoint>().limits=;
+        JointLimits limits = objectToEffect.GetComponent<HingeJoint>().limits;
+        limits.min = -10;
+        limits.max = 0;
+        objectToEffect.GetComponent<HingeJoint>().limits = limits;
+
+        objectToEffect.GetComponent<Rigidbody>().freezeRotation = false;
         objectToEffect.GetComponent<Rigidbody>().AddForce(10,0,0);
+        StartCoroutine(ChangeMin());
     }
 
+    IEnumerator ChangeMin()
+    {
+        while (objectToEffect.transform.position!= previousPosition)
+        {
+            previousPosition = objectToEffect.transform.position;
+            yield return new WaitForSeconds(.25f);
+        }
+        JointLimits limits = objectToEffect.GetComponent<HingeJoint>().limits;
+        limits.min = -70;
+        limits.max = 0;
+        objectToEffect.GetComponent<HingeJoint>().limits = limits;
+    }
 }
 
 public enum SwitchTypes
 {
     Light,
-    Button,
-    playerUnLockedDoor,
+    UnLockedDoor,
+    LockedDoor,
+    SecretDoor
 }

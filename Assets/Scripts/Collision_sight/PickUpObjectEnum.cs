@@ -5,10 +5,6 @@ using UnityEngine;
 public enum PickUpObjectEnum 
 {
     Key,
-    FilmRoll,
-    Note,
-    Card,
-    Tool
 }
 
 public struct ObjectToPutInInventory
