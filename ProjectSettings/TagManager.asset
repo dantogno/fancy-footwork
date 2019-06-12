@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CameraFlash
   - Floor
+  - PhonePadCamera
   layers:
   - Default
   - TransparentFX

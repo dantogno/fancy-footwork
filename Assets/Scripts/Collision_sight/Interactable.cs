@@ -20,58 +20,28 @@ public class Interactable : MonoBehaviour,IInteract
     {
         lookingAt = false;
         triggered = false;
-        if (interationType == InteractionEnum.pickable
-            || interationType == InteractionEnum.door)
-        {
-            render = GetComponent<Renderer>();
-            originalColor = render.material.GetColor("_EmissionColor");
-            render.material.SetColor("_EmissionColor", Color.black);
-        }
+        render = GetComponent<Renderer>();
+        originalColor = render.material.GetColor("_EmissionColor");
+        render.material.SetColor("_EmissionColor", Color.black);
     }
 
     // Update is called once per frame
     void Update()
     {
-        //switch for different types
-        switch(interationType)
-        {
-            case InteractionEnum.pickable:
-                HighLight();
-                break;
-            case InteractionEnum.trigger:
-                if (lookingAt)
-                    triggerAction();
-                else
-                {
-                    if (triggered)
-                        triggered = false;
-                }
-                break;
-            case InteractionEnum.door:
-                HighLight();
-                break;
-        }
+        HighLight();
     }
     //set trigger to true if looking at and a button is clicked
     public void triggerAction()
     {
-        if (interationType == InteractionEnum.pickable
-           || interationType == InteractionEnum.door)
+        float clicked = Input.GetAxis("Fire2");
+        if (clicked > 0)
         {
-            float clicked = Input.GetAxis("Fire2");
-            if(clicked>0)
-            {
-                if (!triggered)
-                    triggered = true;
-            }
-            else if(clicked==0)
-            {
-                triggered = false;
-            }
+            if (!triggered)
+                triggered = true;
         }
-        else
+        else if (clicked == 0)
         {
-            triggered=true;
+            triggered = false;
         }
     }
 
