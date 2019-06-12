@@ -21,7 +21,7 @@ public class Interactable : MonoBehaviour,IInteract
         lookingAt = false;
         triggered = false;
         if (interationType == InteractionEnum.pickable
-            || interationType == InteractionEnum._switch)
+            || interationType == InteractionEnum.door)
         {
             render = GetComponent<Renderer>();
             originalColor = render.material.GetColor("_EmissionColor");
@@ -47,7 +47,7 @@ public class Interactable : MonoBehaviour,IInteract
                         triggered = false;
                 }
                 break;
-            case InteractionEnum._switch:
+            case InteractionEnum.door:
                 HighLight();
                 break;
         }
@@ -56,7 +56,7 @@ public class Interactable : MonoBehaviour,IInteract
     public void triggerAction()
     {
         if (interationType == InteractionEnum.pickable
-           || interationType == InteractionEnum._switch)
+           || interationType == InteractionEnum.door)
         {
             float clicked = Input.GetAxis("Fire2");
             if(clicked>0)

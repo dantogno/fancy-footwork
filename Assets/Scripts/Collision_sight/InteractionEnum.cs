@@ -6,6 +6,6 @@ public enum InteractionEnum
 {
     pickable,
     trigger,
-    _switch,
+    door,
 
 }
