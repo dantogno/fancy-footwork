@@ -268,7 +268,7 @@ GameObject:
   - component: {fileID: 2021701036070204107}
   - component: {fileID: 2021701036070204108}
   - component: {fileID: 2021701036070204109}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -584,7 +584,7 @@ GameObject:
   - component: {fileID: 2021701036165057008}
   - component: {fileID: 2021701036165057009}
   - component: {fileID: 2021701036165057010}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Toilet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -892,7 +892,7 @@ GameObject:
   - component: {fileID: 2021701036327678631}
   - component: {fileID: 2021701036327678648}
   - component: {fileID: 2021701036327678649}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BathroomWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1208,7 +1208,7 @@ GameObject:
   - component: {fileID: 2021701036899249900}
   - component: {fileID: 2021701036899249901}
   - component: {fileID: 2021701036899249902}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Counter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1548,7 +1548,7 @@ GameObject:
   - component: {fileID: 2021701037128019141}
   - component: {fileID: 2021701037128019142}
   - component: {fileID: 2021701037128019143}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Room
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1929,9 +1929,17 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_IsSelectable: 1
-  m_SelectedFaces: 
-  m_SelectedEdges: []
-  m_SelectedVertices: 
+  m_SelectedFaces: 04000000
+  m_SelectedEdges:
+  - a: 18
+    b: 19
+  - a: 19
+    b: 17
+  - a: 17
+    b: 16
+  - a: 16
+    b: 18
+  m_SelectedVertices: 12000000130000001100000010000000
 --- !u!64 &2021701037128019143
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2239,7 +2247,7 @@ GameObject:
   - component: {fileID: 2021701037263321935}
   - component: {fileID: 2021701037263321920}
   - component: {fileID: 2021701037263321921}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BathroomDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2766,7 +2774,7 @@ GameObject:
   - component: {fileID: 2021701037354815969}
   - component: {fileID: 2021701037354815970}
   - component: {fileID: 2021701037354815971}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Door (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3333,7 +3341,7 @@ GameObject:
   - component: {fileID: 2021701037565950520}
   - component: {fileID: 2021701037565950521}
   - component: {fileID: 2021701037565950522}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: TvStand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3649,7 +3657,7 @@ GameObject:
   - component: {fileID: 2021701037699809507}
   - component: {fileID: 2021701037699809508}
   - component: {fileID: 2021701037699809509}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bathtub
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -12,6 +12,9 @@ public class LightFlicker : MonoBehaviour
     [SerializeField]
     private float secondsOnMax = 3.0f, secondsOffMax = 1.0f;
 
+    [SerializeField]
+    private AudioClip lightOnClip, lightOffClip;
+
     private float timer;
     private float startingLightIntensity;
     private AudioSource audioSource;
@@ -32,11 +35,11 @@ public class LightFlicker : MonoBehaviour
         timer = Random.Range(0.1f, secondsOnMax);
         yield return new WaitForSeconds(timer);
         light.intensity = 0.0f;
-        audioSource.Play();
+        audioSource.PlayOneShot(lightOffClip, 0.1f);
         timer = Random.Range(0.1f, secondsOffMax);
         yield return new WaitForSeconds(timer);
         light.intensity = startingLightIntensity;
-        audioSource.Play();
+        audioSource.PlayOneShot(lightOnClip, 0.1f);
         StartCoroutine(FlickeringLight());
     }
 }

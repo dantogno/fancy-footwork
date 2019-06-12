@@ -115,8 +115,8 @@ MonoBehaviour:
   barrierLayer:
     serializedVersion: 2
     m_Bits: 1024
-  gridWorldSize: {x: 20, y: 20}
-  nodeRadius: 0.5
+  gridWorldSize: {x: 60, y: 66}
+  nodeRadius: 0.25
 --- !u!114 &4791654274543616131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,7 +131,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
   goalsInOrder:
-  - {fileID: 0}
   - {fileID: 0}
 --- !u!82 &4791654274543616143
 AudioSource:
@@ -255,6 +254,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BloodyFootStep (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8966593866567155792, guid: 5fbb6bb60016b9449a63979311ff1ede,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 2902569407019437963, guid: 5fbb6bb60016b9449a63979311ff1ede,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -335,6 +339,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BloodyFootStep (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8966593866567155792, guid: 5fbb6bb60016b9449a63979311ff1ede,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2902569407019437963, guid: 5fbb6bb60016b9449a63979311ff1ede,
         type: 3}
@@ -417,6 +426,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BloodyFootStep
       objectReference: {fileID: 0}
+    - target: {fileID: 8966593866567155792, guid: 5fbb6bb60016b9449a63979311ff1ede,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 2902569407019437963, guid: 5fbb6bb60016b9449a63979311ff1ede,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -497,6 +511,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BloodyFootStep (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8966593866567155792, guid: 5fbb6bb60016b9449a63979311ff1ede,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2902569407019437963, guid: 5fbb6bb60016b9449a63979311ff1ede,
         type: 3}

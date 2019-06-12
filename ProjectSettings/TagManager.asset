@@ -7,6 +7,8 @@ TagManager:
   - CameraFlash
   - Floor
   - PhonePadCamera
+  - SecretStairsPanel
+  - LuggageCart
   layers:
   - Default
   - TransparentFX
