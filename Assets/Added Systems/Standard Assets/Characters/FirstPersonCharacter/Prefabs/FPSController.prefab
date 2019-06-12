@@ -315,6 +315,7 @@ GameObject:
   - component: {fileID: 2000000}
   - component: {fileID: 8100000}
   - component: {fileID: 12474086}
+  - component: {fileID: 402512487}
   m_Layer: 0
   m_Name: FirstPersonCharacter
   m_TagString: MainCamera
@@ -368,7 +369,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 311
+    m_Bits: 3383
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -396,6 +397,22 @@ Behaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100002}
   m_Enabled: 1
+--- !u!114 &402512487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 342bc31cdd12bfc4c9513e75022a6519, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerMaskToCheck:
+    serializedVersion: 2
+    m_Bits: 2048
+  rayDistance: 10
 --- !u!1001 &4778404434819347902
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -463,6 +480,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4778404434659780935, guid: cfcd5e69e913d1447a499e5cffbc600c,
+        type: 3}
+      propertyPath: cameraWindClicks
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4778404434659780935, guid: cfcd5e69e913d1447a499e5cffbc600c,
+        type: 3}
+      propertyPath: finishWind
+      value: 
+      objectReference: {fileID: 8300000, guid: 3911b29c74682e744928c9b99154353a, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cfcd5e69e913d1447a499e5cffbc600c, type: 3}
 --- !u!4 &461561080 stripped
