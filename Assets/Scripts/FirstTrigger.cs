@@ -46,12 +46,12 @@ public class FirstTrigger : MonoBehaviour
         yield return new WaitForSeconds(delay1);
         ghostFigure.SetActive(true);
         audioSource.PlayOneShot(lightsOn, 1.0f);
-        backLight.intensity = 1.5f;
+        backLight.intensity = 1.0f;
         yield return new WaitForSeconds(stutterDelay);
         audioSource.PlayOneShot(lightsOff, 1.0f);
         backLight.intensity = 0.0f;
         yield return new WaitForSeconds(stutterDelay);
-        backLight.intensity = 1.5f;
+        backLight.intensity = 1.0f;
         audioSource.PlayOneShot(lightsOn, 1.0f);
         objectToActivate.SetActive(true);
         yield return new WaitForSeconds(stutterDelay);
