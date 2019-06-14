@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class Phone : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class Phone : MonoBehaviour
     //camera for phone key pad
     private Camera phoneCamera;
     //interactable script
-    public Interactable interact;
+    private Interactable interact;
     //bool to see if the cameras have already been switched
     private bool setActive_Inactive = false;
     //The number buttons
@@ -30,6 +31,9 @@ public class Phone : MonoBehaviour
     //button to exit the camera view
     public Button exitButton;
 
+    private int[] code= new int[3];
+    private int codeIndex = 0;
+    public int[] codeKey=new int[3];
 
     // Start is called before the first frame update
     void Start()
@@ -41,90 +45,168 @@ public class Phone : MonoBehaviour
         phoneCamera.enabled = false;
         //get the interactable component
         interact = GetComponent<Interactable>();
+        //Set the text to empty
         numberBox.text = "";
+        //set the automatic lock to false
+        GameObject.FindGameObjectWithTag("Player").GetComponent<FirstPersonController>().m_MouseLook.lockCursor = false;
+        //lock the cursor
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        //intialize the buttons
+        InitializeButtons();
     }
 
     private void InitializeButtons()
     {
+        //phone pad 1
         Button btn = one.GetComponent<Button>();
         btn.onClick.AddListener(TaskOnClick1);
+        //phone pad 2
         Button btn1 = two.GetComponent<Button>();
         btn1.onClick.AddListener(TaskOnClick2);
+        //phone pad 3
         Button btn2 = three.GetComponent<Button>();
         btn2.onClick.AddListener(TaskOnClick3);
+        //phone pad 4
         Button btn3 = four.GetComponent<Button>();
         btn3.onClick.AddListener(TaskOnClick4);
+        //phone pad 5
         Button btn4 = five.GetComponent<Button>();
         btn4.onClick.AddListener(TaskOnClick5);
+        //phone pad 6
         Button btn5 = six.GetComponent<Button>();
         btn5.onClick.AddListener(TaskOnClick6);
+        //phone pad 7
         Button btn6 = seven.GetComponent<Button>();
         btn6.onClick.AddListener(TaskOnClick7);
-        Button btn7 = seven.GetComponent<Button>();
-        btn6.onClick.AddListener(TaskOnClick8);
-        Button btn8 = seven.GetComponent<Button>();
-        btn6.onClick.AddListener(TaskOnClick9);
-        Button btn9 = seven.GetComponent<Button>();
-        btn6.onClick.AddListener(TaskOnClick0);
-        Button btnExit = seven.GetComponent<Button>();
+        //phone pad 8
+        Button btn7 = eight.GetComponent<Button>();
+        btn7.onClick.AddListener(TaskOnClick8);
+        //phone pad 9
+        Button btn8 = nine.GetComponent<Button>();
+        btn8.onClick.AddListener(TaskOnClick9);
+        //phone pad 10
+        Button btn9 = zero.GetComponent<Button>();
+        btn9.onClick.AddListener(TaskOnClick0);
+        //phone pad exit
+        Button btnExit = exitButton.GetComponent<Button>();
         btnExit.onClick.AddListener(TaskOnClickExit);
     }
 
     private void TaskOnClickExit()
     {
-        throw new NotImplementedException();
+        //reset the bool
+        setActive_Inactive = false;
+        //activate the player again
+        mainCamera.gameObject.gameObject.SetActive(true);
+        //disable phone camera
+        phoneCamera.enabled = false;
+        //relock cursor
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     private void TaskOnClick0()
     {
-        throw new NotImplementedException();
+        if(codeIndex<3)
+        {
+            numberBox.text += (" 0 ");
+            code[codeIndex] = 0;
+            codeIndex++;
+        }
     }
 
     private void TaskOnClick9()
     {
-        throw new NotImplementedException();
+        if (codeIndex < 3)
+        {
+            numberBox.text += (" 9 ");
+            code[codeIndex] = 9;
+            codeIndex++;
+        }
     }
 
     private void TaskOnClick8()
     {
-        throw new NotImplementedException();
+        if (codeIndex < 3)
+        {
+            numberBox.text += (" 8 ");
+            code[codeIndex] = 8;
+            codeIndex++;
+        }
     }
 
     private void TaskOnClick7()
     {
-        throw new NotImplementedException();
+        if (codeIndex < 3)
+        {
+            numberBox.text += (" 7 ");
+            code[codeIndex] = 7;
+            codeIndex++;
+        }
     }
 
     private void TaskOnClick6()
     {
-        throw new NotImplementedException();
+        if (codeIndex < 3)
+        {
+            numberBox.text += (" 6 ");
+            code[codeIndex] = 6;
+            codeIndex++;
+        }
     }
 
     private void TaskOnClick5()
     {
-        throw new NotImplementedException();
+        if (codeIndex < 3)
+        {
+            numberBox.text += (" 5 ");
+            code[codeIndex] = 5;
+            codeIndex++;
+        }
     }
 
     private void TaskOnClick4()
     {
-        throw new NotImplementedException();
+        if (codeIndex < 3)
+        {
+            numberBox.text += (" 4 ");
+            code[codeIndex] = 4;
+            codeIndex++;
+        }
     }
 
     private void TaskOnClick3()
     {
-        throw new NotImplementedException();
+        if (codeIndex < 3)
+        {
+            numberBox.text += (" 3 ");
+            code[codeIndex] = 3;
+            codeIndex++;
+        }
     }
 
     private void TaskOnClick2()
     {
-        throw new NotImplementedException();
+        if (codeIndex < 3)
+        {
+            numberBox.text += (" 2 ");
+            code[codeIndex] = 2;
+            codeIndex++;
+        }
     }
 
     private void TaskOnClick1()
     {
-        throw new NotImplementedException();
+        if (codeIndex < 3)
+        {
+            numberBox.text += (" 1 ");
+            code[codeIndex] = 1;
+            codeIndex++;
+        }
     }
 
+    bool completedcode = false;
     // Update is called once per frame
     void Update()
     {
@@ -134,10 +216,58 @@ public class Phone : MonoBehaviour
             //if not switch before then switch
             if (!setActive_Inactive)
             {
+                //make sure if triggered again, not recalled
                 setActive_Inactive = true;
                 //disable the whole gameobject hierarchy to stop error
                 mainCamera.gameObject.gameObject.SetActive(false);
+                //enable phone camera
                 phoneCamera.enabled = true;
+                //unlock cursor
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+        }
+        if(codeIndex>=3)
+        {
+            //check if code is correct
+            for(int i=0;i<3;i++)
+            {
+                //if number is correct then set true
+                if(codeKey[i]==code[i])
+                {
+                    completedcode = true;
+                }
+                //otherwise set to false and break loop
+                else
+                {
+                    completedcode = false;
+                    break;
+                }
+            }
+            if(completedcode)
+            {
+                //activate the player again
+                mainCamera.gameObject.gameObject.SetActive(true);
+                //disable phone camera
+                phoneCamera.enabled = false;
+                //relock cursor
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+                //take away outline
+                if (GetComponent<Renderer>().material.GetColor("_EmissionColor") != Color.black)
+                    GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.black);
+                //no longer interactable
+                interact.enabled = false;
+                //open secert door
+                GameObject door=GameObject.FindGameObjectWithTag("SecretStairsPanel");
+                if (door != null)
+                    door.GetComponent<HauntedMovingObject>().objectShouldMove = true;
+            }
+            else
+            {
+                //reset
+                codeIndex = 0;
+                numberBox.text = "";
             }
         }
     }

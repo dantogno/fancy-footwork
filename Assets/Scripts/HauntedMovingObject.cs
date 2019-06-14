@@ -22,7 +22,7 @@ public class HauntedMovingObject : MonoBehaviour
     private bool audioIsPlaying = false;
     private AudioSource audioSource;
 
-    private bool objectShouldMove = false;
+    public bool objectShouldMove = false;
 
     private void Start()
     {
