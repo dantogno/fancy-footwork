@@ -10,11 +10,11 @@ public class CameraFlash : MonoBehaviour
     //the amount of time the flash lasts
     public float flashExposureTime = 2;
 
+    [Tooltip("Amount of time between when camera flash is finished fading out and hidden objects fully dissapear.")]
+    public float hiddenObjectFadeDelay = 1;
+
     //amount of clicks needed to wind
     public float cameraWindClicks = 5;
-
-    //flash cool down
-    public float flashWindDown = 3;
 
     //Amount to decrease flash overtime by
     public float decreaseFlashAmount=.5f;
@@ -96,7 +96,6 @@ public class CameraFlash : MonoBehaviour
     }
 
     private float secondsPast = 0;
-    private float previousTime = 0;
     //Have the camera flash for a specified time
     private void MakeCameraFlash()
     {
@@ -125,33 +124,29 @@ public class CameraFlash : MonoBehaviour
 
     //decrease the intensity of the light all the way to zero
     private void MakeFlashDisipate()
-    {
-        //if time past doesn't equal fade time and the intensity isn't already 0
-        if (secondsPast != flashWindDown && flashObject.intensity != 0)
+     {
+        if (secondsPast < flashExposureTime)
         {
-            //increase time passed
-            secondsPast += Time.deltaTime;
-            //if greater than the previous time by set value 
-            if (secondsPast >= (previousTime + lightFadeTimeFrequence))
-            {
-                //set the previous time to the new one
-                previousTime = secondsPast;
-                //decrease intensity by set amount
-                flashObject.intensity -= decreaseFlashAmount;
-            }
+            // Reduce light intensity based on time that has passed.
+            flashObject.intensity = Mathf.Lerp(flashIntensity, 0, secondsPast / flashExposureTime);
         }
         else
+            flashObject.intensity = 0;
+            
+        // Use the hiddenObjectFadeDelay to give our hidden objects a bit of extra visible time
+        // after the light goes out.
+        if (secondsPast > flashExposureTime + hiddenObjectFadeDelay)
         {
             //reset everything
             //make the foot steps disappear
             Camera.main.cullingMask &= ~(1 << LayerMask.NameToLayer("FootSteps"));
-            flashObject.intensity = 0;
             secondsPast = 0;
-            previousTime = 0;
             showFootSteps = false;
             //set the next state
             currentFlashState = FlashState.Winding;
         }
+        else
+            secondsPast += Time.deltaTime;
     }
 
 
