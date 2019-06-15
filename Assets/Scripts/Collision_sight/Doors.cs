@@ -9,6 +9,10 @@ public class Doors : MonoBehaviour
     private GameObject objectToEffect;
     public GameObject player;
     private Interactable interact;
+    
+    [SerializeField]
+    private AudioClip paintingUnlock, doorUnlock, doorOpen;
+    private AudioSource audioSource;
     //public float ifLightSwitch_Intensity = 2;
     //Light lightObject;
     //bool hasBeenActiviated = false;
@@ -17,9 +21,15 @@ public class Doors : MonoBehaviour
     bool isUnlocked = true;
     public GameObject paintingDoor;
 
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
+        
         interact = GetComponent<Interactable>();
         if (typeOfDoor != DoorTypes.PaintingLock)
             objectToEffect = gameObject;
@@ -46,6 +56,7 @@ public class Doors : MonoBehaviour
         {
             hasBeenCalled = true;
             SwitchAction();
+
         }
         else if (!interact.triggered && hasBeenCalled)
         {
@@ -62,12 +73,14 @@ public class Doors : MonoBehaviour
         switch (typeOfDoor)
         {
             case DoorTypes.UnLockedDoor:
-                OpenUnLockedDoor();
+                audioSource.PlayOneShot(doorOpen);
+                OpenUnLockedDoor();            
                 break;
             //case DoorTypes.Light:
             //    TurnLightOn_Off();
             //    break;
             case DoorTypes.LockedFloorDoor:
+                audioSource.PlayOneShot(doorUnlock);
                 UnLockLockedDoor();
                 break;
             case DoorTypes.PaintingDoor:
@@ -78,6 +91,7 @@ public class Doors : MonoBehaviour
                 if (!isRotating && !hasRotated)
                 {
                     isRotating = true;
+                    audioSource.PlayOneShot(paintingUnlock);
                     RotatePainting();
                 }
                 break;
@@ -113,6 +127,7 @@ public class Doors : MonoBehaviour
             hasRotated = true;
             objectToEffect = paintingDoor;
             OpenUnLockedDoor();
+
         }
         //Vector3 goToPosition = transform.position;
         //goToPosition.y= GameObject.FindGameObjectWithTag("Floor").transform.position.y+1;
@@ -121,7 +136,7 @@ public class Doors : MonoBehaviour
     }
     private void UnLockLockedDoor()
     {
-
+  
     }
 
     Vector3 previousPosition = Vector3.zero;
@@ -134,8 +149,9 @@ public class Doors : MonoBehaviour
         objectToEffect.GetComponent<HingeJoint>().limits = limits;
 
         objectToEffect.GetComponent<Rigidbody>().freezeRotation = false;
-        objectToEffect.GetComponent<Rigidbody>().AddForce(50, 0, 0);
+        objectToEffect.GetComponent<Rigidbody>().AddForce(50, 0, 0); 
         StartCoroutine(ChangeMin());
+
     }
 
     IEnumerator ChangeMin()
@@ -145,6 +161,7 @@ public class Doors : MonoBehaviour
             previousPosition = objectToEffect.transform.position;
             yield return new WaitForSeconds(.25f);
         }
+        //audioSource.PlayOneShot(doorOpen);
         JointLimits limits = objectToEffect.GetComponent<HingeJoint>().limits;
         limits.min = -70;
         limits.max = 0;
