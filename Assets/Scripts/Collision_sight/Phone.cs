@@ -35,6 +35,8 @@ public class Phone : MonoBehaviour
     private int codeIndex = 0;
     public int[] codeKey=new int[3];
 
+    public Canvas phoneCanvas;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -54,6 +56,7 @@ public class Phone : MonoBehaviour
         Cursor.visible = false;
         //intialize the buttons
         InitializeButtons();
+        phoneCanvas.enabled = false;
     }
 
     private void InitializeButtons()
@@ -104,6 +107,7 @@ public class Phone : MonoBehaviour
         //relock cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        phoneCanvas.enabled = false;
     }
 
     private void TaskOnClick0()
@@ -225,6 +229,7 @@ public class Phone : MonoBehaviour
                 //unlock cursor
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
+                phoneCanvas.enabled = true;
             }
         }
         if(codeIndex>=3)
