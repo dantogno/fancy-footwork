@@ -65,7 +65,9 @@ public class Doors : MonoBehaviour
 
         if (isRotating &&!hasRotated)
             RotatePainting();
-        
+        if((objectToEffect.transform.rotation.ToEuler().y * (180 / Mathf.PI)) > -70 && (objectToEffect.transform.rotation.ToEuler().y * (180 / Mathf.PI)) < -60)
+            objectToEffect.GetComponent<Rigidbody>().freezeRotation = true;
+
     }
 
     private void SwitchAction()
@@ -126,6 +128,11 @@ public class Doors : MonoBehaviour
         {
             hasRotated = true;
             objectToEffect = paintingDoor;
+            //take away outline
+            if (GetComponent<Renderer>().material.GetColor("_EmissionColor") != Color.black)
+                GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.black);
+            //no longer interactable
+            interact.enabled = false;
             OpenUnLockedDoor();
 
         }

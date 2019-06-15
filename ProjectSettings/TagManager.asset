@@ -9,6 +9,7 @@ TagManager:
   - PhonePadCamera
   - SecretStairsPanel
   - LuggageCart
+  - NoteCamera
   layers:
   - Default
   - TransparentFX
