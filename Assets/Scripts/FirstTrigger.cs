@@ -62,6 +62,6 @@ public class FirstTrigger : MonoBehaviour
         spotLight.intensity = 3.0f;
         light1.intensity = 0.2f;
         audioSource.PlayOneShot(lightsOn, 1.0f);
-        audioSource.PlayOneShot(laugh);
+        audioSource.PlayOneShot(laugh, 0.8f);
     }
 }
