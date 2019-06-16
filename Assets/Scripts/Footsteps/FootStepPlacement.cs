@@ -83,7 +83,8 @@ public class FootStepPlacement : MonoBehaviour
     void CheckPlayerPosition()
     {
         //if the player has hit the space then set the next positions
-        if(player.GetComponent<BoxCollider>().bounds.Contains(footSteps[footSteps.Count - 1].transform.position))
+        //player.GetComponent<BoxCollider>().bounds.Contains(footSteps[footSteps.Count - 1].transform.position)
+        if (Vector3.Distance(player.transform.position, footSteps[footSteps.Count - 1].transform.position)<4)
         {
             if ((startingNode + 4) < (grid.path.Count - 5))
             {

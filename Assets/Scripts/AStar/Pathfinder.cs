@@ -27,6 +27,7 @@ public class Pathfinder : MonoBehaviour
 
     private void Start()
     {
+        CalculateThePath();
     }
 
     void Update()

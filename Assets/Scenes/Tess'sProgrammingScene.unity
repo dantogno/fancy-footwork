@@ -738,7 +738,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-2752
+  m_Name: pb_Mesh-80950
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -901,7 +901,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-2756
+  m_Name: pb_Mesh-80954
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1168,7 +1168,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-2758
+  m_Name: pb_Mesh-80914
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1331,7 +1331,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-2754
+  m_Name: pb_Mesh-80952
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2073,17 +2073,7 @@ PrefabInstance:
       propertyPath: goalsInOrder.Array.data[0]
       value: 
       objectReference: {fileID: 2103735324}
-    - target: {fileID: 4791654274543616131, guid: d751daf86630a6f44a2e6e5f71cd7325,
-        type: 3}
-      propertyPath: goalsInOrder.Array.data[1]
-      value: 
-      objectReference: {fileID: 982937117}
     - target: {fileID: 97133349045547316, guid: d751daf86630a6f44a2e6e5f71cd7325,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 1151093081}
-    - target: {fileID: 7675835695052545908, guid: d751daf86630a6f44a2e6e5f71cd7325,
         type: 3}
       propertyPath: m_Mesh
       value: 
@@ -2093,17 +2083,7 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1555495098}
-    - target: {fileID: 5964655688997562505, guid: d751daf86630a6f44a2e6e5f71cd7325,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 1555495098}
     - target: {fileID: 4988664089579703054, guid: d751daf86630a6f44a2e6e5f71cd7325,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 1262694923}
-    - target: {fileID: 3378920383172289870, guid: d751daf86630a6f44a2e6e5f71cd7325,
         type: 3}
       propertyPath: m_Mesh
       value: 
@@ -2113,51 +2093,26 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1520156044}
-    - target: {fileID: 7435938619187267552, guid: d751daf86630a6f44a2e6e5f71cd7325,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 1520156044}
     - target: {fileID: 2633545568561402105, guid: d751daf86630a6f44a2e6e5f71cd7325,
-        type: 3}
-      propertyPath: flashObject
-      value: 
-      objectReference: {fileID: 1499474441}
-    - target: {fileID: 2633545568561402105, guid: d751daf86630a6f44a2e6e5f71cd7325,
-        type: 3}
-      propertyPath: amountToDissolve
-      value: 0.04
-      objectReference: {fileID: 0}
-    - target: {fileID: 6713818422428730899, guid: d751daf86630a6f44a2e6e5f71cd7325,
         type: 3}
       propertyPath: flashObject
       value: 
       objectReference: {fileID: 1499474441}
     - target: {fileID: 6713818422428730899, guid: d751daf86630a6f44a2e6e5f71cd7325,
         type: 3}
-      propertyPath: amountToDissolve
-      value: 0.04
-      objectReference: {fileID: 0}
-    - target: {fileID: 7980960284418026478, guid: d751daf86630a6f44a2e6e5f71cd7325,
-        type: 3}
       propertyPath: flashObject
       value: 
       objectReference: {fileID: 1499474441}
     - target: {fileID: 7980960284418026478, guid: d751daf86630a6f44a2e6e5f71cd7325,
-        type: 3}
-      propertyPath: amountToDissolve
-      value: 0.04
-      objectReference: {fileID: 0}
-    - target: {fileID: 4656067012322450521, guid: d751daf86630a6f44a2e6e5f71cd7325,
         type: 3}
       propertyPath: flashObject
       value: 
       objectReference: {fileID: 1499474441}
     - target: {fileID: 4656067012322450521, guid: d751daf86630a6f44a2e6e5f71cd7325,
         type: 3}
-      propertyPath: amountToDissolve
-      value: 0.04
-      objectReference: {fileID: 0}
+      propertyPath: flashObject
+      value: 
+      objectReference: {fileID: 1499474441}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d751daf86630a6f44a2e6e5f71cd7325, type: 3}
 --- !u!1001 &5839089021700403236

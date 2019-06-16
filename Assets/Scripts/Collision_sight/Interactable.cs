@@ -49,7 +49,7 @@ public class Interactable : MonoBehaviour,IInteract
     public void HighLight()
     {
         //if the player is looking at an object then set the color to the original color
-        if(lookingAt)
+        if(lookingAt && Vector3.Distance(GameObject.FindGameObjectWithTag("Player").transform.position,transform.position)<3)
         {
             //if it hasn't already been set, then set back to preset color
             if (render.material.GetColor("_EmissionColor") != originalColor)

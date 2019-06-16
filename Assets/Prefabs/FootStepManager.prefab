@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flashObject: {fileID: 0}
-  amountToDissolve: 0.01
 --- !u!114 &2633545568561402105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27,7 +26,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flashObject: {fileID: 0}
-  amountToDissolve: 0.01
 --- !u!114 &4656067012322450521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41,7 +39,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flashObject: {fileID: 0}
-  amountToDissolve: 0.01
 --- !u!1 &4791654274543616128
 GameObject:
   m_ObjectHideFlags: 0
@@ -241,7 +238,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flashObject: {fileID: 0}
-  amountToDissolve: 0.01
 --- !u!1001 &970204542490979901
 PrefabInstance:
   m_ObjectHideFlags: 0
