@@ -13,6 +13,7 @@ namespace Gameplay {
         public PlayerCharacter playerCharacter { get; private set; }
 
         public FirstPersonCamera playerCamera;
+        public Vector3 cameraOffest;
 
         protected void Awake()
         {
@@ -23,7 +24,8 @@ namespace Gameplay {
         protected void Update()
         {
             var transform = this.transform;
-
+            if (GetComponent<Rigidbody>().angularVelocity != Vector3.zero)
+                GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
             PlayerInput input;
             PlayerInput.Update(out input);
 
@@ -47,9 +49,12 @@ namespace Gameplay {
                 firstPersonCamera.yaw = yaw;
             }
 
+            
+            
             var transform = this.transform;
             var position = transform.localPosition;
             var rotation = transform.localEulerAngles;
+            rotation = new Vector3(rotation.x, (Mathf.Clamp(rotation.y, rotation.y - 50, rotation.y+50)), rotation.z);
             float deltaTime = Time.deltaTime;
 
             playerCamera.Simulate(position, rotation, deltaTime);

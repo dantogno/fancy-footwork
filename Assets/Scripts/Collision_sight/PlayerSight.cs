@@ -108,8 +108,9 @@ public class PlayerSight : MonoBehaviour
             //if they aren't currently being looked at then reset
             if(!objectsBeingLookedAt.Contains(lookedAt[i]))
             {
-                //set variable to false
-                lookedAt[i].GetComponent<Interactable>().lookingAt = false;
+                if (lookedAt[i].GetComponent<Interactable>() != null)
+                    //set variable to false
+                    lookedAt[i].GetComponent<Interactable>().lookingAt = false;
                 //remove from previous list
                 lookedAt.Remove(lookedAt[i]);
             }

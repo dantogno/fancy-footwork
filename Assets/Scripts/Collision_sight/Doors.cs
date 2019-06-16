@@ -20,7 +20,7 @@ public class Doors : MonoBehaviour
     bool isRotating = false;
     bool isUnlocked = true;
     public GameObject paintingDoor;
-
+    private Quaternion initalRotation;
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
@@ -45,7 +45,7 @@ public class Doors : MonoBehaviour
         //    if (lightObject != null)
         //        lightObject.intensity = 0;
         //}
-
+        initalRotation = objectToEffect.transform.rotation;
         objectToEffect.GetComponent<Rigidbody>().freezeRotation = true;
     }
 
@@ -65,7 +65,8 @@ public class Doors : MonoBehaviour
 
         if (isRotating &&!hasRotated)
             RotatePainting();
-        if((objectToEffect.transform.rotation.ToEuler().y * (180 / Mathf.PI)) > -70 && (objectToEffect.transform.rotation.ToEuler().y * (180 / Mathf.PI)) < -60)
+        if((objectToEffect.transform.rotation.ToEuler().y * (180 / Mathf.PI)) >= ((initalRotation.ToEuler().y * (180 / Mathf.PI))-70) 
+            && (objectToEffect.transform.rotation.ToEuler().y * (180 / Mathf.PI)) < ((initalRotation.ToEuler().y * (180 / Mathf.PI)) - 55))
             objectToEffect.GetComponent<Rigidbody>().freezeRotation = true;
 
     }

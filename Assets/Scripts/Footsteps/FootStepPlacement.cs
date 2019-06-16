@@ -111,21 +111,42 @@ public class FootStepPlacement : MonoBehaviour
         //Place steps
         //count of how many have been placed starting at 0
         int index = 0;
+        //if(grid.path!=null)
         //place each game object to the correct spot
-        foreach (GameObject f in footSteps)
+        if (grid.path != null)
         {
-            if (startingNode + index < (grid.path.Count - 1))
-                //get the world position of the grid node
-                f.transform.position = grid.path[startingNode + index].worldPosition;
+            foreach (GameObject f in footSteps)
+            {
+                if (startingNode + index < (grid.path.Count - 1))
+                    //get the world position of the grid node
+                    f.transform.position = grid.path[startingNode + index].worldPosition;
 
-            f.transform.LookAt(grid.path[startingNode + (index+1)].worldPosition);
-            //increase the index
-            index++;
-            yield return new WaitForSeconds(secondsBetweenSteps);
+                f.transform.LookAt(grid.path[startingNode + (index + 1)].worldPosition);
+                //increase the index
+                index++;
+                yield return new WaitForSeconds(secondsBetweenSteps);
+            }
         }
-        //set it to be placed
-        notPlaced = false;
-        canPlace = true;
+            //set it to be placed
+            notPlaced = false;
+            canPlace = true;
     }
+
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.tag == "LastFootStep")
+    //    {
+    //        if ((startingNode + 4) < (grid.path.Count - 5))
+    //        {
+    //            if (canPlace)
+    //            {
+    //                canPlace = false;
+    //                startingNode += 4;
+    //                notPlaced = true;
+    //                StartCoroutine(PlaySound());
+    //            }
+    //        }
+    //    }
+    //}
 
 }
