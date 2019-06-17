@@ -19,6 +19,9 @@ public class FootStepPlacement : MonoBehaviour
     //player object
     public GameObject player=null;
 
+    [SerializeField]
+    private AudioClip foostepSound;
+
     public AudioSource audioSource;
 
     List<Node> previousPath;
@@ -102,7 +105,7 @@ public class FootStepPlacement : MonoBehaviour
     //play the foot step sounds
     IEnumerator PlaySound()
     {
-        audioSource.Play();
+        audioSource.PlayOneShot(foostepSound, 2f);
         yield return new WaitForSeconds(1);
         StartCoroutine(PlaceSteps());
     }
