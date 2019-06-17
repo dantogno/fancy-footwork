@@ -20,7 +20,11 @@ public class Breathing_HeadBob : MonoBehaviour
         {
             float theta = Time.timeSinceLevelLoad / period;
             float distance = amplitude * Mathf.Sin(theta);
-            transform.position = player.transform.position + Vector3.up * distance;
+            transform.position += Vector3.up * distance;
+        }
+        else if(startPos!=transform.position)
+        {
+            startPos = transform.position;
         }
         lastPosition = player.transform.position;
     }
