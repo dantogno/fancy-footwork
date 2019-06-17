@@ -331,6 +331,7 @@ GameObject:
   - component: {fileID: 8100000}
   - component: {fileID: 12474086}
   - component: {fileID: 402512487}
+  - component: {fileID: 1969690859}
   m_Layer: 0
   m_Name: FirstPersonCharacter
   m_TagString: MainCamera
@@ -428,6 +429,20 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   rayDistance: 3
+--- !u!114 &1969690859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ae6167b11834de4ba1a1da9126ab96a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amplitude: 0.1
+  period: 1
 --- !u!1 &5242472392195412790
 GameObject:
   m_ObjectHideFlags: 0
@@ -595,6 +610,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 400002}
     m_Modifications:
+    - target: {fileID: 4778404434659780936, guid: cfcd5e69e913d1447a499e5cffbc600c,
+        type: 3}
+      propertyPath: m_Name
+      value: Camera Flash
+      objectReference: {fileID: 0}
     - target: {fileID: 4778404434659780934, guid: cfcd5e69e913d1447a499e5cffbc600c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -649,11 +669,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4778404434659780936, guid: cfcd5e69e913d1447a499e5cffbc600c,
-        type: 3}
-      propertyPath: m_Name
-      value: Camera Flash
       objectReference: {fileID: 0}
     - target: {fileID: 4778404434659780935, guid: cfcd5e69e913d1447a499e5cffbc600c,
         type: 3}
