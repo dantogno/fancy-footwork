@@ -33,7 +33,7 @@ public class CameraFlash : MonoBehaviour
     private bool playedFlash = false;
 
     //whether or not to show layer
-    private bool showFootSteps = false;
+    public bool showFootSteps = false;
 
     public enum FlashState { Ready, Flash, Fading, Winding};
     public FlashState currentFlashState;
@@ -64,20 +64,20 @@ public class CameraFlash : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Get the input from the left mouse button
-        float leftButton = Input.GetAxis("Fire1");
-        //check to see if pressed
-        if(leftButton!=0)
-        {
-            //if the camera is ready to go off again then change state
-            //and call appropriate method
-            if (currentFlashState == FlashState.Ready)
-            {
-                currentFlashState = FlashState.Flash;
-                showFootSteps = true;
-                MakeCameraFlash();
-            }
-        }
+        ////Get the input from the left mouse button
+        //float leftButton = Input.GetAxis("Fire1");
+        ////check to see if pressed
+        //if(leftButton!=0)
+        //{
+        //    //if the camera is ready to go off again then change state
+        //    //and call appropriate method
+        //    if (currentFlashState == FlashState.Ready)
+        //    {
+        //        currentFlashState = FlashState.Flash;
+        //        showFootSteps = true;
+        //        MakeCameraFlash();
+        //    }
+        //}
         if(currentFlashState==FlashState.Flash)
         {
             MakeCameraFlash();
@@ -97,7 +97,7 @@ public class CameraFlash : MonoBehaviour
 
     private float secondsPast = 0;
     //Have the camera flash for a specified time
-    private void MakeCameraFlash()
+    public void MakeCameraFlash()
     {
         //check how long the flash has lasted
         if (secondsPast <= flashExposureTime)
