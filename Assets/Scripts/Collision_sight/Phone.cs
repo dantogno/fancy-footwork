@@ -250,9 +250,9 @@ public class Phone : MonoBehaviour
             //if not switch before then switch
             if (!setActive_Inactive)
             {
-
                 audioSource.Stop();
-                phoneAudio.enabled = true;
+                audioSource.loop = false;
+                //phoneAudio.enabled = true;
                 //make sure if triggered again, not recalled
                 setActive_Inactive = true;
                 //disable the whole gameobject hierarchy to stop error
@@ -323,5 +323,21 @@ public class Phone : MonoBehaviour
             }
         }
         
+    }
+
+    private void OnPhoneShouldRing()
+    {
+        audioSource.loop = true;
+        audioSource.Play();
+    }
+
+    private void OnEnable()
+    {
+        EndOfSecondHallTrigger.PhoneShouldRing += OnPhoneShouldRing;
+    }
+
+    private void OnDisable()
+    {
+        EndOfSecondHallTrigger.PhoneShouldRing -= OnPhoneShouldRing;
     }
 }
