@@ -21,6 +21,8 @@ public class Phone : MonoBehaviour
     [SerializeField]
     private AudioClip ring, pickUp, hangUp, buttonPress, enterCode, wrongCode, rightCode, floorShift;
 
+    private bool previousEnableBool;
+
     //The number buttons
     public Button one;
     public Button two;
@@ -42,6 +44,7 @@ public class Phone : MonoBehaviour
     public int[] codeKey=new int[3];
 
     public Canvas phoneCanvas;
+    public Canvas playerCanvas;
     private AudioSource audioSource;
 
     // Start is called before the first frame update
@@ -53,6 +56,7 @@ public class Phone : MonoBehaviour
         //mainAudio = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioListener>();
         phoneCamera = GameObject.FindGameObjectWithTag("PhonePadCamera").GetComponent<Camera>();
         phoneAudio = GameObject.FindGameObjectWithTag("PhonePadCamera").GetComponent<AudioListener>();
+        playerCanvas = GameObject.FindGameObjectWithTag("PlayerCanvas").GetComponent<Canvas>();
         //set the non-player camera to false
         phoneCamera.enabled = false;
         phoneAudio.enabled = false;
@@ -124,8 +128,10 @@ public class Phone : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         phoneCanvas.enabled = false;
+        if (previousEnableBool)
+            playerCanvas.enabled = true;
 
-        
+
     }
 
     private void TaskOnClick0()
@@ -263,6 +269,9 @@ public class Phone : MonoBehaviour
                 //unlock cursor
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
+                previousEnableBool = playerCanvas.enabled;
+                if (previousEnableBool)
+                    playerCanvas.enabled = false;
                 phoneCanvas.enabled = true;
                 audioSource.PlayOneShot(pickUp);
                 audioSource.PlayOneShot(enterCode, 0.7f);
@@ -298,7 +307,9 @@ public class Phone : MonoBehaviour
                 //disable phone camera
                 phoneCamera.enabled = false;
                 phoneAudio.enabled = false;
-                
+                if (previousEnableBool)
+                    playerCanvas.enabled = true;
+                phoneCanvas.enabled = false;
                 //relock cursor
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
