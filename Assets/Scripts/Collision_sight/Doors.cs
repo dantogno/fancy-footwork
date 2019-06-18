@@ -153,7 +153,7 @@ public class Doors : MonoBehaviour
     {
         //objectToEffect.GetComponent<HingeJoint>().limits=;
         JointLimits limits = objectToEffect.GetComponent<HingeJoint>().limits;
-        limits.min = -20;
+        limits.min = (objectToEffect.transform.rotation.ToEuler().y * (180 / Mathf.PI)) - 20;
         limits.max = 0;
         objectToEffect.GetComponent<HingeJoint>().limits = limits;
 
@@ -172,7 +172,7 @@ public class Doors : MonoBehaviour
         }
         //audioSource.PlayOneShot(doorOpen);
         JointLimits limits = objectToEffect.GetComponent<HingeJoint>().limits;
-        limits.min = -70;
+        limits.min = (objectToEffect.transform.rotation.ToEuler().y * (180 / Mathf.PI)) - 70;
         limits.max = 0;
         objectToEffect.GetComponent<HingeJoint>().limits = limits;
     }
