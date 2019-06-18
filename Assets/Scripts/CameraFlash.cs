@@ -16,6 +16,8 @@ public class CameraFlash : MonoBehaviour
     //amount of clicks needed to wind
     public float cameraWindClicks = 5;
 
+    public Canvas playerCameraCanvas;
+
     //Amount to decrease flash overtime by
     public float decreaseFlashAmount=.5f;
 
@@ -59,6 +61,7 @@ public class CameraFlash : MonoBehaviour
         //set intial flash state
         currentFlashState = FlashState.Ready;
         audioSource = GetComponent<AudioSource>();
+        playerCameraCanvas.enabled = false;
     }
 
     // Update is called once per frame
@@ -154,6 +157,7 @@ public class CameraFlash : MonoBehaviour
     private bool clicked = false;
     private void WindCameraUp()
     {
+        playerCameraCanvas.enabled = true;
         //get the scroll wheel delta value
         float scrollWheel = Input.GetAxis("Mouse ScrollWheel");
         //if scrolling up increase the amount of clicks
@@ -188,6 +192,7 @@ public class CameraFlash : MonoBehaviour
             audioSource.PlayOneShot(finishWind);
             clicks = 0;
             clicked = false;
+            playerCameraCanvas.enabled = false;
         }
     }
 }
