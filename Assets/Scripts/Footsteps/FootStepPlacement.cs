@@ -122,9 +122,10 @@ public class FootStepPlacement : MonoBehaviour
                 //get the world position of the grid node
                 f.transform.position = grid.path[startingNode + index].worldPosition;
 
-            f.transform.LookAt(grid.path[startingNode + (index+1)].worldPosition);
+            if (startingNode + (index+1) < (grid.path.Count - 1))
+                f.transform.LookAt(grid.path[startingNode + (index+1)].worldPosition);
             //increase the index
-            index++;
+            index+=2;
             yield return new WaitForSeconds(secondsBetweenSteps);
         }
         //set it to be placed

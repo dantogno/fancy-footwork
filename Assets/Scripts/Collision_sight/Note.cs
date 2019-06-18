@@ -12,11 +12,13 @@ public class Note : MonoBehaviour
     private Interactable interact;
     private bool setActive_Inactive;
     public Canvas NoteCanvas;
+    public Canvas playerCanvas;
 
     [SerializeField]
     private AudioClip notePickUp, notePutDown;
 
     private AudioSource audioSource;
+    bool previousEnableBool = false;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +28,8 @@ public class Note : MonoBehaviour
         mainCamera = Camera.main;
         noteCamera = GameObject.FindGameObjectWithTag("NoteCamera").GetComponent<Camera>();
         GameObject.FindGameObjectWithTag("NoteCamera").GetComponent<AudioListener>().enabled=false;
+        playerCanvas = GameObject.FindGameObjectWithTag("PlayerCanvas").GetComponent<Canvas>();
+        previousEnableBool = playerCanvas.enabled;
         noteCamera.enabled = false;
         exit.onClick.AddListener(TaskOnClick);
         NoteCanvas.enabled = false;
@@ -43,6 +47,8 @@ public class Note : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         NoteCanvas.enabled = false;
+        if (previousEnableBool)
+            playerCanvas.enabled = true;
         GameObject.FindGameObjectWithTag("NoteCamera").GetComponent<AudioListener>().enabled = false;
         audioSource.PlayOneShot(notePutDown);
     }
@@ -66,6 +72,9 @@ public class Note : MonoBehaviour
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
                 NoteCanvas.enabled = true;
+                previousEnableBool = playerCanvas.enabled;
+                if (previousEnableBool)
+                    playerCanvas.enabled = false;
                 GameObject.FindGameObjectWithTag("NoteCamera").GetComponent<AudioListener>().enabled = true;
                 audioSource.PlayOneShot(notePickUp, 2f);
             }
