@@ -67,7 +67,7 @@ public class Doors : MonoBehaviour
         if (isRotating &&!hasRotated)
             RotatePainting();
         if((objectToEffect.transform.rotation.ToEuler().y * (180 / Mathf.PI)) > ((intialRotation.ToEuler().y * (180 / Mathf.PI)) - 70) 
-            && (objectToEffect.transform.rotation.ToEuler().y * (180 / Mathf.PI)) < ((intialRotation.ToEuler().y * (180 / Mathf.PI)) - 55))
+            && (objectToEffect.transform.rotation.ToEuler().y * (180 / Mathf.PI)) < ((intialRotation.ToEuler().y * (180 / Mathf.PI)) - 60))
             objectToEffect.GetComponent<Rigidbody>().freezeRotation = true;
 
     }
