@@ -12,9 +12,16 @@ public class Note : MonoBehaviour
     private Interactable interact;
     private bool setActive_Inactive;
     public Canvas NoteCanvas;
+
+    [SerializeField]
+    private AudioClip notePickUp, ding;
+
+    private AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         interact = GetComponent<Interactable>();
         mainCamera = Camera.main;
         noteCamera = GameObject.FindGameObjectWithTag("NoteCamera").GetComponent<Camera>();
@@ -35,6 +42,7 @@ public class Note : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         NoteCanvas.enabled = false;
+        audioSource.PlayOneShot(ding);
     }
 
     // Update is called once per frame
@@ -42,9 +50,10 @@ public class Note : MonoBehaviour
     {
         if(interact.triggered)
         {
+            
             //if not switch before then switch
             if (!setActive_Inactive)
-            {
+            { 
                 //make sure if triggered again, not recalled
                 setActive_Inactive = true;
                 //disable the whole gameobject hierarchy to stop error
@@ -55,6 +64,7 @@ public class Note : MonoBehaviour
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
                 NoteCanvas.enabled = true;
+                audioSource.PlayOneShot(notePickUp, 2f);
             }
         }
     }

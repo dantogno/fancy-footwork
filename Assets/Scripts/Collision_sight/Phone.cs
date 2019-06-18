@@ -9,12 +9,18 @@ public class Phone : MonoBehaviour
 {
     //main camera
     private Camera mainCamera;
+    private AudioListener mainAudio;
     //camera for phone key pad
     private Camera phoneCamera;
+    private AudioListener phoneAudio;
     //interactable script
     private Interactable interact;
     //bool to see if the cameras have already been switched
     private bool setActive_Inactive = false;
+
+    [SerializeField]
+    private AudioClip ring, pickUp, hangUp, buttonPress, enterCode, wrongCode, rightCode, floorShift;
+
     //The number buttons
     public Button one;
     public Button two;
@@ -36,15 +42,20 @@ public class Phone : MonoBehaviour
     public int[] codeKey=new int[3];
 
     public Canvas phoneCanvas;
+    private AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
     {
-        //get the camea objects
+        audioSource = GetComponent<AudioSource>();
+        //get the camera objects
         mainCamera = Camera.main;
+        //mainAudio = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioListener>();
         phoneCamera = GameObject.FindGameObjectWithTag("PhonePadCamera").GetComponent<Camera>();
+        //phoneAudio = GameObject.FindGameObjectWithTag("PhonePadCamera").GetComponent<AudioListener>();
         //set the non-player camera to false
         phoneCamera.enabled = false;
+        //phoneAudio.enabled = false;
         //get the interactable component
         interact = GetComponent<Interactable>();
         //Set the text to empty
@@ -98,22 +109,30 @@ public class Phone : MonoBehaviour
 
     private void TaskOnClickExit()
     {
+        audioSource.Stop();
+        audioSource.PlayOneShot(hangUp);
         //reset the bool
         setActive_Inactive = false;
         //activate the player again
-        mainCamera.gameObject.gameObject.SetActive(true);
+        
         //disable phone camera
         phoneCamera.enabled = false;
+        //phoneAudio.enabled = false;
+        mainCamera.gameObject.gameObject.SetActive(true);
+        //mainAudio.enabled = true;
         //relock cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         phoneCanvas.enabled = false;
+
+        
     }
 
     private void TaskOnClick0()
     {
         if(codeIndex<3)
         {
+            audioSource.PlayOneShot(buttonPress);
             numberBox.text += (" 0 ");
             code[codeIndex] = 0;
             codeIndex++;
@@ -124,6 +143,7 @@ public class Phone : MonoBehaviour
     {
         if (codeIndex < 3)
         {
+            audioSource.PlayOneShot(buttonPress);
             numberBox.text += (" 9 ");
             code[codeIndex] = 9;
             codeIndex++;
@@ -134,6 +154,7 @@ public class Phone : MonoBehaviour
     {
         if (codeIndex < 3)
         {
+            audioSource.PlayOneShot(buttonPress);
             numberBox.text += (" 8 ");
             code[codeIndex] = 8;
             codeIndex++;
@@ -144,6 +165,7 @@ public class Phone : MonoBehaviour
     {
         if (codeIndex < 3)
         {
+            audioSource.PlayOneShot(buttonPress);
             numberBox.text += (" 7 ");
             code[codeIndex] = 7;
             codeIndex++;
@@ -154,6 +176,7 @@ public class Phone : MonoBehaviour
     {
         if (codeIndex < 3)
         {
+            audioSource.PlayOneShot(buttonPress);
             numberBox.text += (" 6 ");
             code[codeIndex] = 6;
             codeIndex++;
@@ -164,6 +187,7 @@ public class Phone : MonoBehaviour
     {
         if (codeIndex < 3)
         {
+            audioSource.PlayOneShot(buttonPress);
             numberBox.text += (" 5 ");
             code[codeIndex] = 5;
             codeIndex++;
@@ -174,6 +198,7 @@ public class Phone : MonoBehaviour
     {
         if (codeIndex < 3)
         {
+            audioSource.PlayOneShot(buttonPress);
             numberBox.text += (" 4 ");
             code[codeIndex] = 4;
             codeIndex++;
@@ -184,6 +209,7 @@ public class Phone : MonoBehaviour
     {
         if (codeIndex < 3)
         {
+            audioSource.PlayOneShot(buttonPress);
             numberBox.text += (" 3 ");
             code[codeIndex] = 3;
             codeIndex++;
@@ -194,6 +220,7 @@ public class Phone : MonoBehaviour
     {
         if (codeIndex < 3)
         {
+            audioSource.PlayOneShot(buttonPress);
             numberBox.text += (" 2 ");
             code[codeIndex] = 2;
             codeIndex++;
@@ -204,6 +231,7 @@ public class Phone : MonoBehaviour
     {
         if (codeIndex < 3)
         {
+            audioSource.PlayOneShot(buttonPress);
             numberBox.text += (" 1 ");
             code[codeIndex] = 1;
             codeIndex++;
@@ -211,25 +239,34 @@ public class Phone : MonoBehaviour
     }
 
     bool completedcode = false;
+    bool codeAccepted = false;
     // Update is called once per frame
     void Update()
     {
         //if the switch has been triggered then switch camera views
         if(interact.triggered)
         {
+              
             //if not switch before then switch
             if (!setActive_Inactive)
             {
+
+                audioSource.Stop();
                 //make sure if triggered again, not recalled
                 setActive_Inactive = true;
                 //disable the whole gameobject hierarchy to stop error
                 mainCamera.gameObject.gameObject.SetActive(false);
                 //enable phone camera
+                //mainAudio.enabled = false;
                 phoneCamera.enabled = true;
+                //phoneAudio.enabled = true;
+                //phoneAudio.enabled = true; 
                 //unlock cursor
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
                 phoneCanvas.enabled = true;
+                audioSource.PlayOneShot(pickUp);
+                audioSource.PlayOneShot(enterCode);
             }
         }
         if(codeIndex>=3)
@@ -240,21 +277,31 @@ public class Phone : MonoBehaviour
                 //if number is correct then set true
                 if(codeKey[i]==code[i])
                 {
+                        
+                    audioSource.Stop();
+                    audioSource.PlayOneShot(rightCode);
+                    audioSource.PlayOneShot(floorShift);
                     completedcode = true;
+
                 }
                 //otherwise set to false and break loop
                 else
                 {
+                    audioSource.Stop();
+                    audioSource.PlayOneShot(wrongCode);
                     completedcode = false;
                     break;
                 }
             }
             if(completedcode)
             {
+
                 //activate the player again
                 mainCamera.gameObject.gameObject.SetActive(true);
                 //disable phone camera
                 phoneCamera.enabled = false;
+                //phoneAudio.enabled = false;
+                //mainAudio.enabled = true;
                 //relock cursor
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
@@ -264,9 +311,12 @@ public class Phone : MonoBehaviour
                 //no longer interactable
                 interact.enabled = false;
                 //open secert door
-                GameObject door=GameObject.FindGameObjectWithTag("SecretStairsPanel");
+                GameObject door =GameObject.FindGameObjectWithTag("SecretStairsPanel");
                 if (door != null)
                     door.GetComponent<HauntedMovingObject>().objectShouldMove = true;
+      
+                
+                
             }
             else
             {
@@ -275,5 +325,6 @@ public class Phone : MonoBehaviour
                 numberBox.text = "";
             }
         }
+        
     }
 }
