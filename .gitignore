@@ -34,3 +34,8 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+Assets/Scenes/ProGrids.meta
+Assets/Scenes/ProGrids/GUI/ProGridsToggles.meta
+Assets/Scenes/ProGrids/GUI/ProGridsToggles.meta
+Assets/ProCore.meta
+Assets/ProBuilder Data.meta
