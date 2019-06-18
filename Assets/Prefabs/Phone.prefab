@@ -220,6 +220,7 @@ GameObject:
   - component: {fileID: 1168513020237744294}
   - component: {fileID: 1168513020237744317}
   - component: {fileID: 1168513020237744314}
+  - component: {fileID: 454684411}
   m_Layer: 11
   m_Name: Phone
   m_TagString: Untagged
@@ -326,6 +327,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d1f66b9472152247a66c26085d0f33a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ring: {fileID: 8300000, guid: 11af09e52a14eac4487179218718a335, type: 3}
+  pickUp: {fileID: 8300000, guid: 10b21a9d9fe9d804a9f7de3eb90404b1, type: 3}
+  hangUp: {fileID: 8300000, guid: 9e049b92b107d024c8fa9899858ae64f, type: 3}
+  buttonPress: {fileID: 8300000, guid: b4e07f7728595bb4599926557d868da4, type: 3}
+  enterCode: {fileID: 8300000, guid: b1ede40bbbf320046a238c4ade7bd251, type: 3}
+  wrongCode: {fileID: 8300000, guid: 49ab98b7c5434d846ac38c07e0111da8, type: 3}
+  rightCode: {fileID: 8300000, guid: f540abbc264671541b8d9850f2f1bb51, type: 3}
+  floorShift: {fileID: 8300000, guid: 994b4f31704539146a671d97225e3170, type: 3}
+  luggageCart: {fileID: 0}
+  luggageCartObject: {fileID: 0}
   one: {fileID: 1168513021054549126}
   two: {fileID: 1168513021847181653}
   three: {fileID: 1168513020588674972}
@@ -338,8 +349,105 @@ MonoBehaviour:
   zero: {fileID: 1168513019774843970}
   numberBox: {fileID: 1168513021274219480}
   exitButton: {fileID: 6866047597253930547}
-  codeKey: 000000000300000005000000
+  codeKey: 050000000200000008000000
   phoneCanvas: {fileID: 1168513021697915461}
+  playerCanvas: {fileID: 0}
+--- !u!82 &454684411
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1168513020237744295}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1168513020449814752
 GameObject:
   m_ObjectHideFlags: 0
