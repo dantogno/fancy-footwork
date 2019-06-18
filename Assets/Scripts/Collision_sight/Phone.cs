@@ -21,6 +21,17 @@ public class Phone : MonoBehaviour
     [SerializeField]
     private AudioClip ring, pickUp, hangUp, buttonPress, enterCode, wrongCode, rightCode, floorShift;
 
+    //To trigger the luggage cart after the phone is hung up
+    [SerializeField]
+    private HauntedMovingObject luggageCart;
+
+    [SerializeField]
+    private GameObject luggageCartObject;
+
+    //bools for checking if they've triggered the phone ringing and if the phone has ever been picked up
+    private bool hasRung = false;
+    private bool hasBeenPickedUpAfterRinging = false;
+
     //The number buttons
     public Button one;
     public Button two;
@@ -110,6 +121,13 @@ public class Phone : MonoBehaviour
 
     private void TaskOnClickExit()
     {
+        //if this is the first time they hang up, move the luggage cart
+        if (hasRung && !hasBeenPickedUpAfterRinging)
+        {
+            MoveCart();
+            hasBeenPickedUpAfterRinging = true;
+        }
+
         audioSource.Stop();
         audioSource.PlayOneShot(hangUp, 0.5f);
         phoneAudio.enabled = false;
@@ -125,7 +143,7 @@ public class Phone : MonoBehaviour
         Cursor.visible = false;
         phoneCanvas.enabled = false;
 
-        
+
     }
 
     private void TaskOnClick0()
@@ -326,10 +344,17 @@ public class Phone : MonoBehaviour
         
     }
 
+    private void MoveCart()
+    {
+        luggageCartObject.SetActive(true);
+        luggageCart.objectShouldMove = true;
+    }
+
     private void OnPhoneShouldRing()
     {
         audioSource.loop = true;
         audioSource.Play();
+        hasRung = true;
     }
 
     private void OnEnable()

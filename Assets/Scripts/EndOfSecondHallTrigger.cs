@@ -16,12 +16,6 @@ public class EndOfSecondHallTrigger : MonoBehaviour
     private Light[] secondHallLights = new Light[8];
 
     [SerializeField]
-    private HauntedMovingObject luggageCart;
-
-    [SerializeField]
-    private GameObject luggageCartObject;
-
-    [SerializeField]
     private AudioClip lightsOff, lightsOn;
 
     [SerializeField]
@@ -56,11 +50,11 @@ public class EndOfSecondHallTrigger : MonoBehaviour
         }
     }
 
-    private void MoveCart()
-    {
-        luggageCartObject.SetActive(true);
-        luggageCart.objectShouldMove = true;
-    }
+    //private void MoveCart()
+    //{
+    //    luggageCartObject.SetActive(true);
+    //    luggageCart.objectShouldMove = true;
+    //}
 
     private void ActivateHandPrints()
     {

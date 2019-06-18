@@ -16,9 +16,6 @@ public class HauntedMovingObject : MonoBehaviour
     [SerializeField]
     private float lerpTime = 10.0f;
 
-    [SerializeField]
-    private AudioClip ring;
-
     private Vector3 startingLocation;
     private float currentLerpTime;
     private bool hasMoved = false;
@@ -59,7 +56,6 @@ public class HauntedMovingObject : MonoBehaviour
         {
             audioSource.Stop();
             audioIsPlaying = false;
-            audioSource.PlayOneShot(ring);
         }
     }
 
