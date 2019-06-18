@@ -32,6 +32,8 @@ public class EndOfSecondHallTrigger : MonoBehaviour
     private bool hasBeenTriggered = false;
     private bool shouldTrigger = false;
 
+    public static event Action PhoneShouldRing;
+
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
@@ -44,6 +46,7 @@ public class EndOfSecondHallTrigger : MonoBehaviour
         {
             StartCoroutine(TurnLights());
             ActivateHandPrints();
+            PhoneShouldRing?.Invoke();
             hasBeenTriggered = true;
         }
 
@@ -80,7 +83,7 @@ public class EndOfSecondHallTrigger : MonoBehaviour
         light2.intensity = 0.0f;
         light3.intensity = 0.0f;
         yield return new WaitForSeconds(lightDelay);
-        MoveCart();
+        //MoveCart();
         light3.intensity = 0.2f;
         audioSource.PlayOneShot(lightsOn);
         yield return new WaitForSeconds(0.2f);

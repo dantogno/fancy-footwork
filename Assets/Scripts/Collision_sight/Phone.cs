@@ -250,13 +250,14 @@ public class Phone : MonoBehaviour
             //if not switch before then switch
             if (!setActive_Inactive)
             {
-
+                
                 audioSource.Stop();
-                phoneAudio.enabled = true;
+                audioSource.loop = false;
                 //make sure if triggered again, not recalled
                 setActive_Inactive = true;
                 //disable the whole gameobject hierarchy to stop error
                 mainCamera.gameObject.gameObject.SetActive(false);
+                phoneAudio.enabled = true;
                 //enable phone camera
                 phoneCamera.enabled = true;
                 //unlock cursor
@@ -275,7 +276,6 @@ public class Phone : MonoBehaviour
                 //if number is correct then set true
                 if(codeKey[i]==code[i])
                 {
-                        
                     audioSource.Stop();
                     completedcode = true;
 
@@ -292,13 +292,13 @@ public class Phone : MonoBehaviour
             if(completedcode)
             {
 
-                //audioSource.PlayOneShot(floorShift);
+                
                 //activate the player again
                 mainCamera.gameObject.gameObject.SetActive(true);
                 //disable phone camera
-                audioSource.Stop();
                 phoneCamera.enabled = false;
                 phoneAudio.enabled = false;
+                
                 //relock cursor
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
@@ -311,9 +311,10 @@ public class Phone : MonoBehaviour
                 GameObject door =GameObject.FindGameObjectWithTag("SecretStairsPanel");
                 if (door != null)
                     door.GetComponent<HauntedMovingObject>().objectShouldMove = true;
-                //audioSource.PlayOneShot(rightCode, 0.7f);
-                
-                
+                audioSource.PlayOneShot(floorShift);
+                audioSource.PlayOneShot(rightCode, 0.7f);
+
+
             }
             else
             {
@@ -323,5 +324,21 @@ public class Phone : MonoBehaviour
             }
         }
         
+    }
+
+    private void OnPhoneShouldRing()
+    {
+        audioSource.loop = true;
+        audioSource.Play();
+    }
+
+    private void OnEnable()
+    {
+        EndOfSecondHallTrigger.PhoneShouldRing += OnPhoneShouldRing;
+    }
+
+    private void OnDisable()
+    {
+        EndOfSecondHallTrigger.PhoneShouldRing -= OnPhoneShouldRing;
     }
 }
