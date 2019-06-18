@@ -28435,7 +28435,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 13.5
+      value: 41.5
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -97699,6 +97699,7 @@ MonoBehaviour:
   - {fileID: 1998608640}
   - {fileID: 1248785020}
   - {fileID: 1248785020}
+  - {fileID: 954810374}
   secondHallLights:
   - {fileID: 186206998}
   - {fileID: 446362687}
@@ -97707,8 +97708,9 @@ MonoBehaviour:
   - {fileID: 165348560}
   - {fileID: 1923313429}
   - {fileID: 1120685383}
-  - {fileID: 954810374}
-  - {fileID: 690478412}
+  - {fileID: 1308974383}
+  - {fileID: 1698937787}
+  - {fileID: 171272301}
   doorToSlam: {fileID: 2007334038}
   doorEndingRotation: {fileID: 1659233698}
   slamTime: 0.5
