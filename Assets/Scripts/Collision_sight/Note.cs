@@ -14,7 +14,7 @@ public class Note : MonoBehaviour
     public Canvas NoteCanvas;
 
     [SerializeField]
-    private AudioClip notePickUp, ding;
+    private AudioClip notePickUp, notePutDown;
 
     private AudioSource audioSource;
 
@@ -25,6 +25,7 @@ public class Note : MonoBehaviour
         interact = GetComponent<Interactable>();
         mainCamera = Camera.main;
         noteCamera = GameObject.FindGameObjectWithTag("NoteCamera").GetComponent<Camera>();
+        GameObject.FindGameObjectWithTag("NoteCamera").GetComponent<AudioListener>().enabled=false;
         noteCamera.enabled = false;
         exit.onClick.AddListener(TaskOnClick);
         NoteCanvas.enabled = false;
@@ -42,7 +43,8 @@ public class Note : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         NoteCanvas.enabled = false;
-        audioSource.PlayOneShot(ding);
+        GameObject.FindGameObjectWithTag("NoteCamera").GetComponent<AudioListener>().enabled = false;
+        audioSource.PlayOneShot(notePutDown);
     }
 
     // Update is called once per frame
@@ -64,6 +66,7 @@ public class Note : MonoBehaviour
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
                 NoteCanvas.enabled = true;
+                GameObject.FindGameObjectWithTag("NoteCamera").GetComponent<AudioListener>().enabled = true;
                 audioSource.PlayOneShot(notePickUp, 2f);
             }
         }
