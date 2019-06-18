@@ -105,7 +105,7 @@ public class CameraFlash : MonoBehaviour
             if(!playedFlash)
             {
                 playedFlash = true;
-                audioSource.PlayOneShot(flash);
+                audioSource.PlayOneShot(flash, 1.5f);
             }
             //set intensity of light to the specified one
             if (flashObject.intensity != flashIntensity)
@@ -181,8 +181,7 @@ public class CameraFlash : MonoBehaviour
         //if wound up then reset
         if(clicks>=cameraWindClicks)
         {
-            //To-Do: Play Sound here
-
+            audioSource.Stop();
             //set the next state
             currentFlashState = FlashState.Ready;
             //reset the values
