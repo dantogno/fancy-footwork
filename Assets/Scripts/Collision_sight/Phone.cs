@@ -110,7 +110,7 @@ public class Phone : MonoBehaviour
     private void TaskOnClickExit()
     {
         audioSource.Stop();
-        audioSource.PlayOneShot(hangUp);
+        audioSource.PlayOneShot(hangUp, 0.5f);
         //reset the bool
         setActive_Inactive = false;
         //activate the player again
@@ -266,7 +266,7 @@ public class Phone : MonoBehaviour
                 Cursor.visible = true;
                 phoneCanvas.enabled = true;
                 audioSource.PlayOneShot(pickUp);
-                audioSource.PlayOneShot(enterCode);
+                audioSource.PlayOneShot(enterCode, 0.7f);
             }
         }
         if(codeIndex>=3)
@@ -279,7 +279,7 @@ public class Phone : MonoBehaviour
                 {
                         
                     audioSource.Stop();
-                    audioSource.PlayOneShot(rightCode);
+                    audioSource.PlayOneShot(rightCode, 0.7f);
                     audioSource.PlayOneShot(floorShift);
                     completedcode = true;
 
@@ -288,7 +288,7 @@ public class Phone : MonoBehaviour
                 else
                 {
                     audioSource.Stop();
-                    audioSource.PlayOneShot(wrongCode);
+                    audioSource.PlayOneShot(wrongCode, 0.7f);
                     completedcode = false;
                     break;
                 }
