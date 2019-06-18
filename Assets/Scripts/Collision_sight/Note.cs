@@ -14,7 +14,7 @@ public class Note : MonoBehaviour
     public Canvas NoteCanvas;
 
     [SerializeField]
-    private AudioClip notePickUp, ding;
+    private AudioClip notePickUp, notePutDown;
 
     private AudioSource audioSource;
 
@@ -44,7 +44,7 @@ public class Note : MonoBehaviour
         Cursor.visible = false;
         NoteCanvas.enabled = false;
         GameObject.FindGameObjectWithTag("NoteCamera").GetComponent<AudioListener>().enabled = false;
-        audioSource.PlayOneShot(ding);
+        audioSource.PlayOneShot(notePutDown);
     }
 
     // Update is called once per frame
