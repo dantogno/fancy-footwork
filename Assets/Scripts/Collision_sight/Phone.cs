@@ -50,12 +50,12 @@ public class Phone : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         //get the camera objects
         mainCamera = Camera.main;
-        mainAudio = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioListener>();
+        //mainAudio = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioListener>();
         phoneCamera = GameObject.FindGameObjectWithTag("PhonePadCamera").GetComponent<Camera>();
-        phoneAudio = GameObject.FindGameObjectWithTag("PhonePadCamera").GetComponent<AudioListener>();
+        //phoneAudio = GameObject.FindGameObjectWithTag("PhonePadCamera").GetComponent<AudioListener>();
         //set the non-player camera to false
         phoneCamera.enabled = false;
-        phoneAudio.enabled = false;
+        //phoneAudio.enabled = false;
         //get the interactable component
         interact = GetComponent<Interactable>();
         //Set the text to empty
@@ -117,7 +117,7 @@ public class Phone : MonoBehaviour
         
         //disable phone camera
         phoneCamera.enabled = false;
-        phoneAudio.enabled = false;
+        //phoneAudio.enabled = false;
         mainCamera.gameObject.gameObject.SetActive(true);
         //mainAudio.enabled = true;
         //relock cursor
@@ -250,7 +250,8 @@ public class Phone : MonoBehaviour
             //if not switch before then switch
             if (!setActive_Inactive)
             {
-               
+
+                audioSource.Stop();
                 //make sure if triggered again, not recalled
                 setActive_Inactive = true;
                 //disable the whole gameobject hierarchy to stop error
@@ -258,14 +259,14 @@ public class Phone : MonoBehaviour
                 //enable phone camera
                 //mainAudio.enabled = false;
                 phoneCamera.enabled = true;
-                phoneAudio.enabled = true;
                 //phoneAudio.enabled = true;
-                audioSource.PlayOneShot(pickUp);         
-                audioSource.PlayOneShot(enterCode);
+                //phoneAudio.enabled = true; 
                 //unlock cursor
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
                 phoneCanvas.enabled = true;
+                audioSource.PlayOneShot(pickUp);
+                audioSource.PlayOneShot(enterCode);
             }
         }
         if(codeIndex>=3)
@@ -276,10 +277,11 @@ public class Phone : MonoBehaviour
                 //if number is correct then set true
                 if(codeKey[i]==code[i])
                 {
-                        //audioSource.Stop();
-                        //audioSource.PlayOneShot(rightCode);
-                        //audioSource.PlayOneShot(floorShift);
-                        completedcode = true;
+                        
+                    audioSource.Stop();
+                    audioSource.PlayOneShot(rightCode);
+                    audioSource.PlayOneShot(floorShift);
+                    completedcode = true;
 
                 }
                 //otherwise set to false and break loop
@@ -293,14 +295,13 @@ public class Phone : MonoBehaviour
             }
             if(completedcode)
             {
-                
+
                 //activate the player again
-                
+                mainCamera.gameObject.gameObject.SetActive(true);
                 //disable phone camera
                 phoneCamera.enabled = false;
-                phoneAudio.enabled = false;
-                mainCamera.gameObject.gameObject.SetActive(true);
-                mainAudio.enabled = true;
+                //phoneAudio.enabled = false;
+                //mainAudio.enabled = true;
                 //relock cursor
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
