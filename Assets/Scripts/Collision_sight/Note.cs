@@ -25,6 +25,7 @@ public class Note : MonoBehaviour
         interact = GetComponent<Interactable>();
         mainCamera = Camera.main;
         noteCamera = GameObject.FindGameObjectWithTag("NoteCamera").GetComponent<Camera>();
+        GameObject.FindGameObjectWithTag("NoteCamera").GetComponent<AudioListener>().enabled=false;
         noteCamera.enabled = false;
         exit.onClick.AddListener(TaskOnClick);
         NoteCanvas.enabled = false;
@@ -42,6 +43,7 @@ public class Note : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         NoteCanvas.enabled = false;
+        GameObject.FindGameObjectWithTag("NoteCamera").GetComponent<AudioListener>().enabled = false;
         audioSource.PlayOneShot(ding);
     }
 
@@ -64,6 +66,7 @@ public class Note : MonoBehaviour
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
                 NoteCanvas.enabled = true;
+                GameObject.FindGameObjectWithTag("NoteCamera").GetComponent<AudioListener>().enabled = true;
                 audioSource.PlayOneShot(notePickUp, 2f);
             }
         }

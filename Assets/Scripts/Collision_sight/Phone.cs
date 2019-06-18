@@ -52,9 +52,10 @@ public class Phone : MonoBehaviour
         mainCamera = Camera.main;
         //mainAudio = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioListener>();
         phoneCamera = GameObject.FindGameObjectWithTag("PhonePadCamera").GetComponent<Camera>();
-        //phoneAudio = GameObject.FindGameObjectWithTag("PhonePadCamera").GetComponent<AudioListener>();
+        phoneAudio = GameObject.FindGameObjectWithTag("PhonePadCamera").GetComponent<AudioListener>();
         //set the non-player camera to false
         phoneCamera.enabled = false;
+        phoneAudio.enabled = false;
         //phoneAudio.enabled = false;
         //get the interactable component
         interact = GetComponent<Interactable>();
@@ -111,15 +112,14 @@ public class Phone : MonoBehaviour
     {
         audioSource.Stop();
         audioSource.PlayOneShot(hangUp, 0.5f);
+        phoneAudio.enabled = false;
         //reset the bool
         setActive_Inactive = false;
         //activate the player again
         
         //disable phone camera
         phoneCamera.enabled = false;
-        //phoneAudio.enabled = false;
         mainCamera.gameObject.gameObject.SetActive(true);
-        //mainAudio.enabled = true;
         //relock cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -252,15 +252,13 @@ public class Phone : MonoBehaviour
             {
 
                 audioSource.Stop();
+                phoneAudio.enabled = true;
                 //make sure if triggered again, not recalled
                 setActive_Inactive = true;
                 //disable the whole gameobject hierarchy to stop error
                 mainCamera.gameObject.gameObject.SetActive(false);
                 //enable phone camera
-                //mainAudio.enabled = false;
                 phoneCamera.enabled = true;
-                //phoneAudio.enabled = true;
-                //phoneAudio.enabled = true; 
                 //unlock cursor
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
@@ -279,8 +277,6 @@ public class Phone : MonoBehaviour
                 {
                         
                     audioSource.Stop();
-                    audioSource.PlayOneShot(rightCode, 0.7f);
-                    audioSource.PlayOneShot(floorShift);
                     completedcode = true;
 
                 }
@@ -296,12 +292,13 @@ public class Phone : MonoBehaviour
             if(completedcode)
             {
 
+                //audioSource.PlayOneShot(floorShift);
                 //activate the player again
                 mainCamera.gameObject.gameObject.SetActive(true);
                 //disable phone camera
+                audioSource.Stop();
                 phoneCamera.enabled = false;
-                //phoneAudio.enabled = false;
-                //mainAudio.enabled = true;
+                phoneAudio.enabled = false;
                 //relock cursor
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
@@ -314,7 +311,7 @@ public class Phone : MonoBehaviour
                 GameObject door =GameObject.FindGameObjectWithTag("SecretStairsPanel");
                 if (door != null)
                     door.GetComponent<HauntedMovingObject>().objectShouldMove = true;
-      
+                //audioSource.PlayOneShot(rightCode, 0.7f);
                 
                 
             }
