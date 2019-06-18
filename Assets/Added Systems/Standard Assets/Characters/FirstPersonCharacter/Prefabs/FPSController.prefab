@@ -68,10 +68,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_IsWalking: 0
-  m_WalkSpeed: 5
-  m_RunSpeed: 10
+  m_WalkSpeed: 3.5
+  m_RunSpeed: 4.5
   m_RunstepLenghten: 0.7
-  m_JumpSpeed: 10
   m_StickToGroundForce: 10
   m_GravityMultiplier: 2
   m_MouseLook:
@@ -114,7 +113,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  m_UseHeadBob: 1
+  m_UseHeadBob: 0
   m_HeadBob:
     HorizontalBobRange: 0.1
     VerticalBobRange: 0.1
@@ -177,7 +176,6 @@ MonoBehaviour:
   m_FootstepSounds:
   - {fileID: 8300000, guid: 42e65e088b3f4374e851b8dbd38f3df9, type: 3}
   - {fileID: 8300000, guid: 8bc94ec6ed537e743b481638bdcd503d, type: 3}
-  m_JumpSound: {fileID: 8300000, guid: 5897aeed9b676024fbb8c694b421a861, type: 3}
   m_LandSound: {fileID: 8300000, guid: 3b09d59f4499d45428baa7a21e954296, type: 3}
 --- !u!54 &5400000
 Rigidbody:
@@ -441,7 +439,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ae6167b11834de4ba1a1da9126ab96a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amplitude: 0.1
+  amplitude: 0.0002
   period: 1
 --- !u!114 &2611724093260271288
 MonoBehaviour:
@@ -507,7 +505,7 @@ PrefabInstance:
     - target: {fileID: 4778404434659780934, guid: cfcd5e69e913d1447a499e5cffbc600c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 23
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4778404434659780934, guid: cfcd5e69e913d1447a499e5cffbc600c,
         type: 3}
@@ -603,6 +601,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7181818936469468963, guid: 20d9c63ece7cc6a4d9bbd122bd63555c,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ddcec7ee18e8a0a459f550fa852aa50b, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20d9c63ece7cc6a4d9bbd122bd63555c, type: 3}
 --- !u!1 &865853407610541306 stripped
