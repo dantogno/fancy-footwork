@@ -24,6 +24,9 @@ public class EndOfSecondHallTrigger : MonoBehaviour
     [SerializeField]
     private AudioClip lightsOff, lightsOn;
 
+    [SerializeField]
+    private GameObject[] handPrintGroup = new GameObject[3];
+
     private MeshCollider triggerCollider;
     private AudioSource audioSource;
     private bool hasBeenTriggered = false;
@@ -40,7 +43,7 @@ public class EndOfSecondHallTrigger : MonoBehaviour
         if (other.tag == "Player" && !hasBeenTriggered && shouldTrigger)
         {
             StartCoroutine(TurnLights());
-            ActivateFootsteps();
+            ActivateHandPrints();
             hasBeenTriggered = true;
         }
 
@@ -56,9 +59,12 @@ public class EndOfSecondHallTrigger : MonoBehaviour
         luggageCart.objectShouldMove = true;
     }
 
-    private void ActivateFootsteps()
+    private void ActivateHandPrints()
     {
-
+        for (int i = 0; i < 3; i++)
+        {
+            handPrintGroup[i].SetActive(true);
+        }
     }
 
     IEnumerator TurnLights()
