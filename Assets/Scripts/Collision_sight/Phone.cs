@@ -316,37 +316,29 @@ public class Phone : MonoBehaviour
                     break;
                 }
             }
-            if(completedcode)
+            if (completedcode)
             {
 
-                if (codeAccepted)
-                {
-                    //activate the player again
-                    mainCamera.gameObject.gameObject.SetActive(true);
-                    //disable phone camera
-                    phoneCamera.enabled = false;
-                    phoneAudio.enabled = false;
-                    if (previousEnableBool)
-                        playerCanvas.enabled = true;
-                    phoneCanvas.enabled = false;
-                    //relock cursor
-                    Cursor.lockState = CursorLockMode.Locked;
-                    Cursor.visible = false;
-                    //take away outline
-                    if (GetComponent<Renderer>().material.GetColor("_EmissionColor") != Color.black)
-                        GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.black);
-                    //no longer interactable
-                    interact.enabled = false;
-                    //open secert door
-                    GameObject door = GameObject.FindGameObjectWithTag("SecretStairsPanel");
-                    if (door != null)
-                        door.GetComponent<HauntedMovingObject>().objectShouldMove = true;
-                    
-                }
-                else
-                {
-                    StartCoroutine(PlaySound());
-                }
+                //activate the player again
+                mainCamera.gameObject.gameObject.SetActive(true);
+                //disable phone camera
+                phoneCamera.enabled = false;
+                phoneAudio.enabled = false;
+                if (previousEnableBool)
+                    playerCanvas.enabled = true;
+                phoneCanvas.enabled = false;
+                //relock cursor
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+                //take away outline
+                if (GetComponent<Renderer>().material.GetColor("_EmissionColor") != Color.black)
+                    GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.black);
+                //no longer interactable
+                interact.enabled = false;
+                //open secert door
+                GameObject door = GameObject.FindGameObjectWithTag("SecretStairsPanel");
+                if (door != null)
+                    door.GetComponent<HauntedMovingObject>().objectShouldMove = true;
                 //if(!codeAccepted && index<2)
                 //{
                 //    if (index == 0 && !audioSource.isPlaying)
