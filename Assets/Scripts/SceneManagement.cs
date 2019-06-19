@@ -15,11 +15,6 @@ public class SceneManagement : MonoBehaviour
     public Button CreditsButton;
     //public Button RestartButton;
 
-    [SerializeField] GameObject loadingUI;
-    [SerializeField] GameObject MenuUI;
-    [SerializeField] Slider loadingProgbar;
-    [SerializeField] Text loadingText;
-
 
     // Use this for initialization
     void Start()
@@ -28,8 +23,6 @@ public class SceneManagement : MonoBehaviour
         //Screen.SetResolution(1920, 1080, true);
 
         //dont destroy this game object
-
-        loadingUI.SetActive(false);
 
         //create code for buttons, buttons only work if there is an object attached to it
         if (InstructionsButton != null)
@@ -112,29 +105,6 @@ public class SceneManagement : MonoBehaviour
         //source.PlayOneShot(pressed);
         DontDestroyOnLoad(this);
         SceneManager.LoadScene("GameScene");
-    }
-
-    private const float LOAD_READY_PERCENTAGE = 0.9f;
-    IEnumerator LoadingSceneRealProgress()
-    {
-        yield return new WaitForSeconds(1);
-        sceneAO = SceneManager.LoadSceneAsync("GameScene");
-
-        // disable scene activation while loading to prevent auto load
-        sceneAO.allowSceneActivation = false;
-
-        while (!sceneAO.isDone)
-        {
-            loadingProgbar.value = sceneAO.progress;
-
-            if (sceneAO.progress >= LOAD_READY_PERCENTAGE)
-            {
-                loadingProgbar.value = 1f;
-                yield return new WaitForSeconds(.5f);
-            }
-            Debug.Log(sceneAO.progress);
-            yield return null;
-        }
     }
 
     //loads win scene
