@@ -14,12 +14,12 @@ public class SceneManagement : MonoBehaviour
     public Button MenuButton;
     public Button CreditsButton;
     //public Button RestartButton;
-    //[SerializeField]
-    //AudioClip pressed;
-    //static AudioClip _pressed;
-    //[SerializeField]
-    //AudioSource source;
-    //static AudioSource _source;
+    [SerializeField]
+    AudioClip pressed;
+    static AudioClip _pressed;
+    [SerializeField]
+    AudioSource source;
+    static AudioSource _source;
     [SerializeField] GameObject loadingUI;
     [SerializeField] GameObject MenuUI;
     [SerializeField] Slider loadingProgbar;
@@ -34,9 +34,11 @@ public class SceneManagement : MonoBehaviour
 
         //Screen.SetResolution(1920, 1080, true);
 
-        //AudioClip _pressed = pressed;
-        //_source = source;
+        AudioClip _pressed = pressed;
+        _source = source;
         //dont destroy this game object
+
+        loadingUI.SetActive(false);
 
         //create code for buttons, buttons only work if there is an object attached to it
         if (InstructionsButton != null)
@@ -79,24 +81,28 @@ public class SceneManagement : MonoBehaviour
     //loads instructions
     void TaskOnClick()
     {
+        //source.PlayOneShot(pressed);
         SceneManager.LoadScene("Instructions");
     }
 
     //exits game
     void TaskOnClick1()
     {
+        //source.PlayOneShot(pressed);
         Application.Quit();
     }
 
     //returns to start menu
     void TaskOnClick2()
     {
+        //source.PlayOneShot(pressed);
         SceneManager.LoadScene("MainMenu");
     }
 
     //loads credits
     void TaskOnClick3()
     {
+        //source.PlayOneShot(pressed);
         SceneManager.LoadScene("Credits");
     }
 
@@ -112,6 +118,7 @@ public class SceneManagement : MonoBehaviour
     void TaskOnClick5()
     {
         
+        //source.PlayOneShot(pressed);
         DontDestroyOnLoad(this);
         loadingUI.SetActive(true);
         MenuUI.SetActive(false);
@@ -135,11 +142,7 @@ public class SceneManagement : MonoBehaviour
             if (sceneAO.progress >= LOAD_READY_PERCENTAGE)
             {
                 loadingProgbar.value = 1f;
-                loadingText.text = "PRESS SPACE TO CONTINUE";
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    sceneAO.allowSceneActivation = true;
-                }
+                yield return new WaitForSeconds(.5f);
             }
             Debug.Log(sceneAO.progress);
             yield return null;
