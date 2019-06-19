@@ -10,7 +10,7 @@ Material:
   m_Name: Door
   m_Shader: {fileID: -6465566751694194690, guid: 5d6d06180bf52554c8e39fe89bb5536a,
     type: 3}
-  m_ShaderKeywords: _METALLICSPECGLOSSMAP
+  m_ShaderKeywords: _METALLICSPECGLOSSMAP _NORMALMAP
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -24,8 +24,16 @@ Material:
         m_Texture: {fileID: 2800000, guid: 110d00f2a55e13a43aa7f87b94c56889, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - Texture2D_5E5C337C:
+        m_Texture: {fileID: 2800000, guid: c236fc55eb9d9664fb978749268bdd00, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - Texture2D_DB79AB45:
         m_Texture: {fileID: 2800000, guid: 4072b6ead8e6e344bb34fdceafc1865f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Albedo:
+        m_Texture: {fileID: 2800000, guid: 110d00f2a55e13a43aa7f87b94c56889, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
@@ -33,7 +41,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 4072b6ead8e6e344bb34fdceafc1865f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:

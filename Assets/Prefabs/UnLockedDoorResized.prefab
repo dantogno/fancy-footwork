@@ -161,6 +161,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeOfDoor: 0
   player: {fileID: 0}
+  paintingUnlock: {fileID: 0}
+  doorUnlock: {fileID: 0}
+  doorOpen: {fileID: 0}
   paintingDoor: {fileID: 0}
 --- !u!114 &5788389658590055477
 MonoBehaviour:
