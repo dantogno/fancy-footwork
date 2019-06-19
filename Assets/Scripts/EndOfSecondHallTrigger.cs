@@ -16,12 +16,6 @@ public class EndOfSecondHallTrigger : MonoBehaviour
     private Light[] secondHallLights = new Light[8];
 
     [SerializeField]
-    private HauntedMovingObject luggageCart;
-
-    [SerializeField]
-    private GameObject luggageCartObject;
-
-    [SerializeField]
     private AudioClip lightsOff, lightsOn;
 
     [SerializeField]
@@ -31,6 +25,8 @@ public class EndOfSecondHallTrigger : MonoBehaviour
     private AudioSource audioSource;
     private bool hasBeenTriggered = false;
     private bool shouldTrigger = false;
+
+    public static event Action PhoneShouldRing;
 
     private void Awake()
     {
@@ -44,20 +40,21 @@ public class EndOfSecondHallTrigger : MonoBehaviour
         {
             StartCoroutine(TurnLights());
             ActivateHandPrints();
+            PhoneShouldRing?.Invoke();
             hasBeenTriggered = true;
         }
 
-        if(other.tag == "Player" && !shouldTrigger)
-        {
-            shouldTrigger = true;
-        }
+        //if(other.tag == "Player" && !shouldTrigger)
+        //{
+        //    shouldTrigger = true;
+        //}
     }
 
-    private void MoveCart()
-    {
-        luggageCartObject.SetActive(true);
-        luggageCart.objectShouldMove = true;
-    }
+    //private void MoveCart()
+    //{
+    //    luggageCartObject.SetActive(true);
+    //    luggageCart.objectShouldMove = true;
+    //}
 
     private void ActivateHandPrints()
     {
@@ -65,6 +62,21 @@ public class EndOfSecondHallTrigger : MonoBehaviour
         {
             handPrintGroup[i].SetActive(true);
         }
+    }
+
+    private void OnPlayerOpenedDoor()
+    {
+        shouldTrigger = true;
+    }
+
+    private void OnEnable()
+    {
+        StairDoorTrigger.PlayerOpenedDoor += OnPlayerOpenedDoor;
+    }
+
+    private void OnDisable()
+    {
+        StairDoorTrigger.PlayerOpenedDoor -= OnPlayerOpenedDoor;
     }
 
     IEnumerator TurnLights()
@@ -80,7 +92,7 @@ public class EndOfSecondHallTrigger : MonoBehaviour
         light2.intensity = 0.0f;
         light3.intensity = 0.0f;
         yield return new WaitForSeconds(lightDelay);
-        MoveCart();
+        //MoveCart();
         light3.intensity = 0.2f;
         audioSource.PlayOneShot(lightsOn);
         yield return new WaitForSeconds(0.2f);

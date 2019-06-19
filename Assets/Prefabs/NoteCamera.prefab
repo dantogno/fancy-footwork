@@ -125,6 +125,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   exit: {fileID: 7780794750799438171}
   NoteCanvas: {fileID: 7780794750551035242}
+  playerCanvas: {fileID: 0}
   notePickUp: {fileID: 8300000, guid: 729b4ac23103cef4c88c8908c9e4daeb, type: 3}
   notePutDown: {fileID: 0}
 --- !u!82 &1316576905

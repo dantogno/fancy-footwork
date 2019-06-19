@@ -10,6 +10,7 @@ TagManager:
   - SecretStairsPanel
   - LuggageCart
   - NoteCamera
+  - PlayerCanvas
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - FootSteps
   - Barrier
   - Interactables
-  - 
+  - Camera
   - 
   - 
   - 

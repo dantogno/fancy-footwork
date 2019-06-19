@@ -21,6 +21,18 @@ public class Phone : MonoBehaviour
     [SerializeField]
     private AudioClip ring, pickUp, hangUp, buttonPress, enterCode, wrongCode, rightCode, floorShift;
 
+    //To trigger the luggage cart after the phone is hung up
+    [SerializeField]
+    private HauntedMovingObject luggageCart;
+
+    [SerializeField]
+    private GameObject luggageCartObject;
+
+    //bools for checking if they've triggered the phone ringing and if the phone has ever been picked up
+    private bool hasRung = false;
+    private bool hasBeenPickedUpAfterRinging = false;
+    private bool previousEnableBool;
+
     //The number buttons
     public Button one;
     public Button two;
@@ -42,6 +54,7 @@ public class Phone : MonoBehaviour
     public int[] codeKey=new int[3];
 
     public Canvas phoneCanvas;
+    public Canvas playerCanvas;
     private AudioSource audioSource;
 
     // Start is called before the first frame update
@@ -53,6 +66,7 @@ public class Phone : MonoBehaviour
         //mainAudio = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioListener>();
         phoneCamera = GameObject.FindGameObjectWithTag("PhonePadCamera").GetComponent<Camera>();
         phoneAudio = GameObject.FindGameObjectWithTag("PhonePadCamera").GetComponent<AudioListener>();
+        playerCanvas = GameObject.FindGameObjectWithTag("PlayerCanvas").GetComponent<Canvas>();
         //set the non-player camera to false
         phoneCamera.enabled = false;
         phoneAudio.enabled = false;
@@ -110,6 +124,13 @@ public class Phone : MonoBehaviour
 
     private void TaskOnClickExit()
     {
+        //if this is the first time they hang up, move the luggage cart
+        if (hasRung && !hasBeenPickedUpAfterRinging)
+        {
+            MoveCart();
+            hasBeenPickedUpAfterRinging = true;
+        }
+
         audioSource.Stop();
         audioSource.PlayOneShot(hangUp, 0.5f);
         phoneAudio.enabled = false;
@@ -124,8 +145,10 @@ public class Phone : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         phoneCanvas.enabled = false;
+        if (previousEnableBool)
+            playerCanvas.enabled = true;
 
-        
+
     }
 
     private void TaskOnClick0()
@@ -240,6 +263,7 @@ public class Phone : MonoBehaviour
 
     bool completedcode = false;
     bool codeAccepted = false;
+    int index = 0;
     // Update is called once per frame
     void Update()
     {
@@ -250,18 +274,22 @@ public class Phone : MonoBehaviour
             //if not switch before then switch
             if (!setActive_Inactive)
             {
-
+                
                 audioSource.Stop();
-                phoneAudio.enabled = true;
+                audioSource.loop = false;
                 //make sure if triggered again, not recalled
                 setActive_Inactive = true;
                 //disable the whole gameobject hierarchy to stop error
                 mainCamera.gameObject.gameObject.SetActive(false);
+                phoneAudio.enabled = true;
                 //enable phone camera
                 phoneCamera.enabled = true;
                 //unlock cursor
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
+                previousEnableBool = playerCanvas.enabled;
+                if (previousEnableBool)
+                    playerCanvas.enabled = false;
                 phoneCanvas.enabled = true;
                 audioSource.PlayOneShot(pickUp);
                 audioSource.PlayOneShot(enterCode, 0.7f);
@@ -275,7 +303,6 @@ public class Phone : MonoBehaviour
                 //if number is correct then set true
                 if(codeKey[i]==code[i])
                 {
-                        
                     audioSource.Stop();
                     completedcode = true;
 
@@ -292,28 +319,53 @@ public class Phone : MonoBehaviour
             if(completedcode)
             {
 
-                //audioSource.PlayOneShot(floorShift);
-                //activate the player again
-                mainCamera.gameObject.gameObject.SetActive(true);
-                //disable phone camera
-                audioSource.Stop();
-                phoneCamera.enabled = false;
-                phoneAudio.enabled = false;
-                //relock cursor
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-                //take away outline
-                if (GetComponent<Renderer>().material.GetColor("_EmissionColor") != Color.black)
-                    GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.black);
-                //no longer interactable
-                interact.enabled = false;
-                //open secert door
-                GameObject door =GameObject.FindGameObjectWithTag("SecretStairsPanel");
-                if (door != null)
-                    door.GetComponent<HauntedMovingObject>().objectShouldMove = true;
-                //audioSource.PlayOneShot(rightCode, 0.7f);
-                
-                
+                if (codeAccepted)
+                {
+                    //activate the player again
+                    mainCamera.gameObject.gameObject.SetActive(true);
+                    //disable phone camera
+                    phoneCamera.enabled = false;
+                    phoneAudio.enabled = false;
+                    if (previousEnableBool)
+                        playerCanvas.enabled = true;
+                    phoneCanvas.enabled = false;
+                    //relock cursor
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.visible = false;
+                    //take away outline
+                    if (GetComponent<Renderer>().material.GetColor("_EmissionColor") != Color.black)
+                        GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.black);
+                    //no longer interactable
+                    interact.enabled = false;
+                    //open secert door
+                    GameObject door = GameObject.FindGameObjectWithTag("SecretStairsPanel");
+                    if (door != null)
+                        door.GetComponent<HauntedMovingObject>().objectShouldMove = true;
+                    
+                }
+                else
+                {
+                    StartCoroutine(PlaySound());
+                }
+                //if(!codeAccepted && index<2)
+                //{
+                //    if (index == 0 && !audioSource.isPlaying)
+                //    {
+                //        audioSource.PlayOneShot(rightCode, 0.7f);
+                //        index++;
+                //    }
+                //    if (index == 1 && !audioSource.isPlaying)
+                //    {
+                //        audioSource.PlayOneShot(floorShift);
+                //        index++;
+                //    }
+                //}
+                //else if(!codeAccepted&& index>=2)
+                //{
+                //    codeAccepted = true;
+                //}
+
+
             }
             else
             {
@@ -323,5 +375,38 @@ public class Phone : MonoBehaviour
             }
         }
         
+    }
+
+    IEnumerator PlaySound()
+    {
+        audioSource.Stop();
+        audioSource.PlayOneShot(rightCode, 0.7f);
+        yield return new WaitForSeconds(2);
+        audioSource.Stop();
+        //audioSource.PlayOneShot(floorShift);
+        codeAccepted = true;
+    }
+
+    private void MoveCart()
+    {
+        luggageCartObject.SetActive(true);
+        luggageCart.objectShouldMove = true;
+    }
+
+    private void OnPhoneShouldRing()
+    {
+        audioSource.loop = true;
+        audioSource.Play();
+        hasRung = true;
+    }
+
+    private void OnEnable()
+    {
+        EndOfSecondHallTrigger.PhoneShouldRing += OnPhoneShouldRing;
+    }
+
+    private void OnDisable()
+    {
+        EndOfSecondHallTrigger.PhoneShouldRing -= OnPhoneShouldRing;
     }
 }

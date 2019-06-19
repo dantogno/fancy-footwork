@@ -9,7 +9,7 @@ public class FirstTrigger : MonoBehaviour
     private Light light1, light2, backLight, spotLight;
 
     [SerializeField]
-    private AudioClip lightsOff, lightsOn, laugh;
+    private AudioClip lightsOff, lightsOn, laugh, firstVideo;
 
     [SerializeField]
     private float delay1 = 1.0f, delay2 = 1.0f, stutterDelay = 0.1f;
@@ -63,5 +63,7 @@ public class FirstTrigger : MonoBehaviour
         light1.intensity = 0.2f;
         audioSource.PlayOneShot(lightsOn, 1.0f);
         audioSource.PlayOneShot(laugh, 1.0f);
+        yield return new WaitForSeconds(delay1);
+        audioSource.PlayOneShot(firstVideo);
     }
 }
