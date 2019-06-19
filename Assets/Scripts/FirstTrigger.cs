@@ -6,28 +6,25 @@ using UnityEngine;
 public class FirstTrigger : MonoBehaviour
 {
     [SerializeField]
-    private Light light1, light2, backLight, spotLight, tvLight;
+    private Light light1, light2, backLight, spotLight;
 
     [SerializeField]
     private AudioClip lightsOff, lightsOn, laugh, firstVideo;
 
     [SerializeField]
-    private float delay1 = 1.0f, delay2 = 1.0f, stutterDelay = 0.1f, tvFlickerDelay = 0.2f, tvFlickerIntensity = 1.0f;
+    private float delay1 = 1.0f, delay2 = 1.0f, stutterDelay = 0.1f;
 
     [SerializeField]
     private GameObject objectToActivate, ghostFigure;
 
     private MeshCollider triggerCollider;
     private bool hasBeenTriggered = false;
-    private bool shouldFlicker = false;
     private AudioSource audioSource;
-    private float tvClipLength;
 
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
         triggerCollider = GetComponent<MeshCollider>();
-        tvClipLength = firstVideo.length;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -68,22 +65,5 @@ public class FirstTrigger : MonoBehaviour
         audioSource.PlayOneShot(laugh, 1.0f);
         yield return new WaitForSeconds(delay1);
         audioSource.PlayOneShot(firstVideo);
-        shouldFlicker = true;
-        StartCoroutine(TVFlicker());
-        yield return new WaitForSeconds(tvClipLength);
-        shouldFlicker = false;
-
-    }
-
-    IEnumerator TVFlicker()
-    {
-        if (shouldFlicker)
-        {
-            tvLight.intensity = tvFlickerIntensity;
-            yield return new WaitForSeconds(tvFlickerDelay);
-            tvLight.intensity = 0.0f;
-            yield return new WaitForSeconds(tvFlickerDelay);
-            StartCoroutine(TVFlicker());
-        }
     }
 }

@@ -19,7 +19,7 @@ public class Phone : MonoBehaviour
     private bool setActive_Inactive = false;
 
     [SerializeField]
-    private AudioClip ring, pickUp, hangUp, buttonPress, enterCode, wrongCode, rightCode, floorShift, secondVideo;
+    private AudioClip ring, pickUp, hangUp, buttonPress, enterCode, wrongCode, rightCode, floorShift;
 
     //To trigger the luggage cart after the phone is hung up
     [SerializeField]
@@ -28,16 +28,9 @@ public class Phone : MonoBehaviour
     [SerializeField]
     private GameObject luggageCartObject;
 
-    [SerializeField]
-    private float tvFlickerDelay = 0.1f, tvFlickerIntensity = 1.0f;
-
-    [SerializeField]
-    private Light tvLight;
-
     //bools for checking if they've triggered the phone ringing and if the phone has ever been picked up
     private bool hasRung = false;
     private bool hasBeenPickedUpAfterRinging = false;
-    private bool shouldFlicker = false;
     private bool previousEnableBool;
 
     //The number buttons
@@ -140,7 +133,7 @@ public class Phone : MonoBehaviour
 
         audioSource.Stop();
         audioSource.PlayOneShot(hangUp, 0.5f);
-        phoneAudio.enabled = false;
+        
         //reset the bool
         setActive_Inactive = false;
         //activate the player again
@@ -323,37 +316,29 @@ public class Phone : MonoBehaviour
                     break;
                 }
             }
-            if(completedcode)
+            if (completedcode)
             {
 
-                if (codeAccepted)
-                {
-                    //activate the player again
-                    mainCamera.gameObject.gameObject.SetActive(true);
-                    //disable phone camera
-                    phoneCamera.enabled = false;
-                    phoneAudio.enabled = false;
-                    if (previousEnableBool)
-                        playerCanvas.enabled = true;
-                    phoneCanvas.enabled = false;
-                    //relock cursor
-                    Cursor.lockState = CursorLockMode.Locked;
-                    Cursor.visible = false;
-                    //take away outline
-                    if (GetComponent<Renderer>().material.GetColor("_EmissionColor") != Color.black)
-                        GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.black);
-                    //no longer interactable
-                    interact.enabled = false;
-                    //open secert door
-                    GameObject door = GameObject.FindGameObjectWithTag("SecretStairsPanel");
-                    if (door != null)
-                        door.GetComponent<HauntedMovingObject>().objectShouldMove = true;
-                    
-                }
-                else
-                {
-                    StartCoroutine(PlaySound());
-                }
+                //activate the player again
+                mainCamera.gameObject.gameObject.SetActive(true);
+                //disable phone camera
+                phoneCamera.enabled = false;
+                phoneAudio.enabled = false;
+                if (previousEnableBool)
+                    playerCanvas.enabled = true;
+                phoneCanvas.enabled = false;
+                //relock cursor
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+                //take away outline
+                if (GetComponent<Renderer>().material.GetColor("_EmissionColor") != Color.black)
+                    GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.black);
+                //no longer interactable
+                interact.enabled = false;
+                //open secert door
+                GameObject door = GameObject.FindGameObjectWithTag("SecretStairsPanel");
+                if (door != null)
+                    door.GetComponent<HauntedMovingObject>().objectShouldMove = true;
                 //if(!codeAccepted && index<2)
                 //{
                 //    if (index == 0 && !audioSource.isPlaying)
@@ -387,7 +372,7 @@ public class Phone : MonoBehaviour
     IEnumerator PlaySound()
     {
         audioSource.Stop();
-        audioSource.PlayOneShot(rightCode, 0.7f);
+        //audioSource.PlayOneShot(rightCode, 0.7f);
         yield return new WaitForSeconds(2);
         codeAccepted = true;
     }
@@ -401,12 +386,11 @@ public class Phone : MonoBehaviour
 
     IEnumerator PlayTV()
     {
-        float tvClipLength = secondVideo.length;
 
-        audioSource.PlayOneShot(secondVideo);
         shouldFlicker = true;
         StartCoroutine(TVFlicker());
-        yield return new WaitForSeconds(tvClipLength);
+        //audioSource.PlayOneShot(secondVideo);
+        yield return new WaitForSeconds(8);
         shouldFlicker = false;
     }
 
