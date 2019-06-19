@@ -120,10 +120,7 @@ public class SceneManagement : MonoBehaviour
         
         //source.PlayOneShot(pressed);
         DontDestroyOnLoad(this);
-        loadingUI.SetActive(true);
-        MenuUI.SetActive(false);
-        loadingText.text = "LOADING...";
-        StartCoroutine(LoadingSceneRealProgress());
+        SceneManager.LoadScene("GameScene");
     }
 
     private const float LOAD_READY_PERCENTAGE = 0.9f;
