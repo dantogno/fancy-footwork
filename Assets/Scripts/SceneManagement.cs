@@ -81,28 +81,28 @@ public class SceneManagement : MonoBehaviour
     //loads instructions
     void TaskOnClick()
     {
-        source.PlayOneShot(pressed);
+        //source.PlayOneShot(pressed);
         SceneManager.LoadScene("Instructions");
     }
 
     //exits game
     void TaskOnClick1()
     {
-        source.PlayOneShot(pressed);
+        //source.PlayOneShot(pressed);
         Application.Quit();
     }
 
     //returns to start menu
     void TaskOnClick2()
     {
-        source.PlayOneShot(pressed);
+        //source.PlayOneShot(pressed);
         SceneManager.LoadScene("MainMenu");
     }
 
     //loads credits
     void TaskOnClick3()
     {
-        source.PlayOneShot(pressed);
+        //source.PlayOneShot(pressed);
         SceneManager.LoadScene("Credits");
     }
 
@@ -118,7 +118,7 @@ public class SceneManagement : MonoBehaviour
     void TaskOnClick5()
     {
         
-        source.PlayOneShot(pressed);
+        //source.PlayOneShot(pressed);
         DontDestroyOnLoad(this);
         loadingUI.SetActive(true);
         MenuUI.SetActive(false);
