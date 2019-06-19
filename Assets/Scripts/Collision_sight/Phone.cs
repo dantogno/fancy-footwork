@@ -382,8 +382,6 @@ public class Phone : MonoBehaviour
         audioSource.Stop();
         audioSource.PlayOneShot(rightCode, 0.7f);
         yield return new WaitForSeconds(2);
-        audioSource.Stop();
-        //audioSource.PlayOneShot(floorShift);
         codeAccepted = true;
     }
 
