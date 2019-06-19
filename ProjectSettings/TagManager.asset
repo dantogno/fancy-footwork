@@ -11,6 +11,8 @@ TagManager:
   - LuggageCart
   - NoteCamera
   - PlayerCanvas
+  - percent
+  - fill
   layers:
   - Default
   - TransparentFX

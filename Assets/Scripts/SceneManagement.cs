@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class SceneManagement : MonoBehaviour
 {
@@ -14,19 +15,15 @@ public class SceneManagement : MonoBehaviour
     public Button MenuButton;
     public Button CreditsButton;
     //public Button RestartButton;
-    [SerializeField]
-    AudioClip pressed;
-    static AudioClip _pressed;
-    [SerializeField]
-    AudioSource source;
-    static AudioSource _source;
-    [SerializeField] GameObject loadingUI;
-    [SerializeField] GameObject MenuUI;
-    [SerializeField] Slider loadingProgbar;
+    //[SerializeField]
+    //AudioClip pressed;
+    //static AudioClip _pressed;
+    //[SerializeField]
+    //AudioSource source;
+    //static AudioSource _source;
+    [SerializeField] Image fillImage;
     [SerializeField] Text loadingText;
-
-    //the number of hiders the seeker has found
-    public static int hidersFound = 0;
+    private float value = 0;
 
     // Use this for initialization
     void Start()
@@ -34,11 +31,12 @@ public class SceneManagement : MonoBehaviour
 
         //Screen.SetResolution(1920, 1080, true);
 
-        AudioClip _pressed = pressed;
-        _source = source;
+        //AudioClip _pressed = pressed;
+        //_source = source;
         //dont destroy this game object
 
-        loadingUI.SetActive(false);
+        if (fillImage != null)
+            fillImage.fillAmount = 0f;
 
         //create code for buttons, buttons only work if there is an object attached to it
         if (InstructionsButton != null)
@@ -81,28 +79,28 @@ public class SceneManagement : MonoBehaviour
     //loads instructions
     void TaskOnClick()
     {
-        source.PlayOneShot(pressed);
+        
         SceneManager.LoadScene("Instructions");
     }
 
     //exits game
     void TaskOnClick1()
     {
-        source.PlayOneShot(pressed);
+        
         Application.Quit();
     }
 
     //returns to start menu
     void TaskOnClick2()
     {
-        source.PlayOneShot(pressed);
+        
         SceneManager.LoadScene("MainMenu");
     }
 
     //loads credits
     void TaskOnClick3()
     {
-        source.PlayOneShot(pressed);
+        
         SceneManager.LoadScene("Credits");
     }
 
@@ -113,38 +111,45 @@ public class SceneManagement : MonoBehaviour
     //    StatManager.hasKey = false;
     //}
 
-    AsyncOperation sceneAO;
+    
+    private bool loadScene = false;
+    public string LoadingSceneName;
     //loads game
     void TaskOnClick5()
     {
-        
-        source.PlayOneShot(pressed);
+
+        SceneManager.LoadScene("GameScene");
         DontDestroyOnLoad(this);
-        loadingUI.SetActive(true);
-        MenuUI.SetActive(false);
-        loadingText.text = "LOADING...";
-        StartCoroutine(LoadingSceneRealProgress());
+        
+        //StartCoroutine(LoadingSceneRealProgress());
     }
 
+    bool found1 = false;
+    bool found2 = false;
     private const float LOAD_READY_PERCENTAGE = 0.9f;
     IEnumerator LoadingSceneRealProgress()
     {
-        yield return new WaitForSeconds(1);
-        sceneAO = SceneManager.LoadSceneAsync("GameScene");
-
-        // disable scene activation while loading to prevent auto load
-        sceneAO.allowSceneActivation = false;
-
-        while (!sceneAO.isDone)
+        if(GameObject.FindGameObjectWithTag("fill")!=null && !found1)
         {
-            loadingProgbar.value = sceneAO.progress;
-
-            if (sceneAO.progress >= LOAD_READY_PERCENTAGE)
-            {
-                loadingProgbar.value = 1f;
-                yield return new WaitForSeconds(.5f);
-            }
-            Debug.Log(sceneAO.progress);
+            found1 = true;
+            fillImage=GameObject.FindGameObjectWithTag("fill").GetComponent<Image>();
+        }
+        if (GameObject.FindGameObjectWithTag("percent") != null && !found2)
+        {
+            found2 = true;
+            loadingText = GameObject.FindGameObjectWithTag("precent").GetComponent<Text>();
+        }
+        
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("GameScene");
+        //asyncLoad.allowSceneActivation = false;
+        // Wait until the asynchronous scene fully loads
+        while (!asyncLoad.isDone)
+        {
+            value = Mathf.Clamp01((asyncLoad.progress / .9f));
+            if (fillImage != null)
+                fillImage.fillAmount = this.value;
+            if (loadingText != null)
+                loadingText.text = (int)(value * 100) + "%";
             yield return null;
         }
     }
@@ -152,7 +157,7 @@ public class SceneManagement : MonoBehaviour
     //loads win scene
     public static void Win()
     {
-        SceneManager.LoadScene("Win");
+        SceneManager.LoadScene("MainMenu");
     }
     //loads gameover scene
     public static void GameOver()

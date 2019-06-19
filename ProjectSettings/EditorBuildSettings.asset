@@ -14,4 +14,31 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameScene.unity
     guid: a9d69c944682bb34d81ff07eb8b7b596
+  - enabled: 1
+    path: Assets/Scenes/LoadingScene.unity
+    guid: 21efb0f5ff4550c41adcfb96e563b19c
+  - enabled: 1
+    path: Assets/Scenes/AaronSoundImplementation.unity
+    guid: 92cbc2c12829b72478de2e729655ec71
+  - enabled: 1
+    path: Assets/Scenes/DavidTestScene.unity
+    guid: 69e779788146e2846a2a0795c1c356ff
+  - enabled: 1
+    path: Assets/Scenes/ImportAssetScene.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/KatLightingTest.unity
+    guid: 492656f4018682442891d3015aeeb144
+  - enabled: 1
+    path: Assets/Scenes/Tess'sFinalTestScene.unity
+    guid: a9062f06376da4240bfd305347a3bcbf
+  - enabled: 1
+    path: Assets/Scenes/Tess'sProgrammingScene.unity
+    guid: 7b785553f5b138540807f2041e2daf52
+  - enabled: 1
+    path: Assets/Scenes/ValHallwayArtUpdate.unity
+    guid: 95700e0966f7eab4e85a948729eea8d0
+  - enabled: 1
+    path: Assets/Scenes/ValLightingTest.unity
+    guid: b5c81cb6735fb484ca2ed7e002999516
   m_configObjects: {}
