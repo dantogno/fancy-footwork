@@ -136,6 +136,7 @@ public class Doors : MonoBehaviour
             //no longer interactable
             interact.enabled = false;
             OpenUnLockedDoor();
+            audioSource.PlayOneShot(doorOpen);
 
         }
         //Vector3 goToPosition = transform.position;
