@@ -1845,17 +1845,17 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_IsSelectable: 1
-  m_SelectedFaces: 00000000
+  m_SelectedFaces: 02000000
   m_SelectedEdges:
-  - a: 2
-    b: 3
-  - a: 3
-    b: 1
-  - a: 1
-    b: 0
-  - a: 0
-    b: 2
-  m_SelectedVertices: 02000000030000000100000000000000
+  - a: 10
+    b: 11
+  - a: 11
+    b: 9
+  - a: 9
+    b: 8
+  - a: 8
+    b: 10
+  m_SelectedVertices: 0a0000000b0000000900000008000000
 --- !u!64 &2021701037128019143
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4675,6 +4675,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2021701037128019160}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 1771af3ac145b7649b07a84230b03c86,
+        type: 3}
+      propertyPath: m_Name
+      value: WallLight (1)
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 1771af3ac145b7649b07a84230b03c86,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4744,11 +4749,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 1771af3ac145b7649b07a84230b03c86,
-        type: 3}
-      propertyPath: m_Name
-      value: WallLight (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1771af3ac145b7649b07a84230b03c86, type: 3}
@@ -5307,6 +5307,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2021701037128019160}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 1771af3ac145b7649b07a84230b03c86,
+        type: 3}
+      propertyPath: m_Name
+      value: WallLight
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 1771af3ac145b7649b07a84230b03c86,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5376,11 +5381,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 1771af3ac145b7649b07a84230b03c86,
-        type: 3}
-      propertyPath: m_Name
-      value: WallLight
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1771af3ac145b7649b07a84230b03c86, type: 3}
