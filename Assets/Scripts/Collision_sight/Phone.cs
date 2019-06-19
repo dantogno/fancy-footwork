@@ -343,24 +343,27 @@ public class Phone : MonoBehaviour
                         door.GetComponent<HauntedMovingObject>().objectShouldMove = true;
                     
                 }
-
-                if(!codeAccepted && index<2)
+                else
                 {
-                    if (index == 0 && !audioSource.isPlaying)
-                    {
-                        audioSource.PlayOneShot(rightCode, 0.7f);
-                        index++;
-                    }
-                    if (index == 1 && !audioSource.isPlaying)
-                    {
-                        audioSource.PlayOneShot(floorShift);
-                        index++;
-                    }
+                    StartCoroutine(PlaySound());
                 }
-                else if(!codeAccepted&& index>=2)
-                {
-                    codeAccepted = true;
-                }
+                //if(!codeAccepted && index<2)
+                //{
+                //    if (index == 0 && !audioSource.isPlaying)
+                //    {
+                //        audioSource.PlayOneShot(rightCode, 0.7f);
+                //        index++;
+                //    }
+                //    if (index == 1 && !audioSource.isPlaying)
+                //    {
+                //        audioSource.PlayOneShot(floorShift);
+                //        index++;
+                //    }
+                //}
+                //else if(!codeAccepted&& index>=2)
+                //{
+                //    codeAccepted = true;
+                //}
 
 
             }
@@ -372,6 +375,16 @@ public class Phone : MonoBehaviour
             }
         }
         
+    }
+
+    IEnumerator PlaySound()
+    {
+        audioSource.Stop();
+        audioSource.PlayOneShot(rightCode, 0.7f);
+        yield return new WaitForSeconds(2);
+        audioSource.Stop();
+        //audioSource.PlayOneShot(floorShift);
+        codeAccepted = true;
     }
 
     private void MoveCart()
