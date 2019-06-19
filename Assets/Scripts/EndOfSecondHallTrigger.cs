@@ -44,10 +44,10 @@ public class EndOfSecondHallTrigger : MonoBehaviour
             hasBeenTriggered = true;
         }
 
-        if(other.tag == "Player" && !shouldTrigger)
-        {
-            shouldTrigger = true;
-        }
+        //if(other.tag == "Player" && !shouldTrigger)
+        //{
+        //    shouldTrigger = true;
+        //}
     }
 
     //private void MoveCart()
@@ -62,6 +62,21 @@ public class EndOfSecondHallTrigger : MonoBehaviour
         {
             handPrintGroup[i].SetActive(true);
         }
+    }
+
+    private void OnPlayerOpenedDoor()
+    {
+        shouldTrigger = true;
+    }
+
+    private void OnEnable()
+    {
+        StairDoorTrigger.PlayerOpenedDoor += OnPlayerOpenedDoor;
+    }
+
+    private void OnDisable()
+    {
+        StairDoorTrigger.PlayerOpenedDoor -= OnPlayerOpenedDoor;
     }
 
     IEnumerator TurnLights()
