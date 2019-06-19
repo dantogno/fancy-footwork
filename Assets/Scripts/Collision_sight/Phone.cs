@@ -140,7 +140,7 @@ public class Phone : MonoBehaviour
 
         audioSource.Stop();
         audioSource.PlayOneShot(hangUp, 0.5f);
-        phoneAudio.enabled = false;
+        
         //reset the bool
         setActive_Inactive = false;
         //activate the player again
@@ -387,7 +387,7 @@ public class Phone : MonoBehaviour
     IEnumerator PlaySound()
     {
         audioSource.Stop();
-        audioSource.PlayOneShot(rightCode, 0.7f);
+        //audioSource.PlayOneShot(rightCode, 0.7f);
         yield return new WaitForSeconds(2);
         codeAccepted = true;
     }
@@ -401,12 +401,11 @@ public class Phone : MonoBehaviour
 
     IEnumerator PlayTV()
     {
-        float tvClipLength = secondVideo.length;
 
-        audioSource.PlayOneShot(secondVideo);
         shouldFlicker = true;
         StartCoroutine(TVFlicker());
-        yield return new WaitForSeconds(tvClipLength);
+        //audioSource.PlayOneShot(secondVideo);
+        yield return new WaitForSeconds(8);
         shouldFlicker = false;
     }
 

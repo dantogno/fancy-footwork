@@ -22,6 +22,9 @@ public class HauntedMovingObject : MonoBehaviour
     private bool audioIsPlaying = false;
     private AudioSource audioSource;
 
+    [SerializeField]
+    private AudioClip secondVideo; 
+
     public bool objectShouldMove = false;
 
     private void Start()
@@ -41,7 +44,10 @@ public class HauntedMovingObject : MonoBehaviour
         {
             MoveObject();
             PlayAudio();
+            audioSource.PlayOneShot(secondVideo, 0.5f);
         }
+   
+            
     }
 
     private void PlayAudio()
@@ -52,7 +58,7 @@ public class HauntedMovingObject : MonoBehaviour
             audioIsPlaying = true;
         }
 
-        if(hasMoved == true)
+        if(hasMoved)
         {
             audioSource.Stop();
             audioIsPlaying = false;
