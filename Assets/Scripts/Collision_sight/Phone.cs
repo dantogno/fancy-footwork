@@ -19,7 +19,7 @@ public class Phone : MonoBehaviour
     private bool setActive_Inactive = false;
 
     [SerializeField]
-    private AudioClip ring, pickUp, hangUp, buttonPress, enterCode, wrongCode, rightCode, floorShift;
+    private AudioClip ring, pickUp, hangUp, buttonPress, enterCode, wrongCode, rightCode, floorShift, secondVideo;
 
     //To trigger the luggage cart after the phone is hung up
     [SerializeField]
@@ -28,10 +28,18 @@ public class Phone : MonoBehaviour
     [SerializeField]
     private GameObject luggageCartObject;
 
+    [SerializeField]
+    private float tvFlickerDelay = 0.1f, tvFlickerIntensity = 1.0f;
+
+    [SerializeField]
+    private Light tvLight;
+
     //bools for checking if they've triggered the phone ringing and if the phone has ever been picked up
     private bool hasRung = false;
     private bool hasBeenPickedUpAfterRinging = false;
+    private bool shouldFlicker = false;
     private bool previousEnableBool;
+    
 
     //The number buttons
     public Button one;
@@ -386,7 +394,6 @@ public class Phone : MonoBehaviour
 
     IEnumerator PlayTV()
     {
-
         shouldFlicker = true;
         StartCoroutine(TVFlicker());
         //audioSource.PlayOneShot(secondVideo);
