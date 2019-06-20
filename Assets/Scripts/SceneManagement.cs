@@ -111,6 +111,8 @@ public class SceneManagement : MonoBehaviour
     public static void Win()
     {
         SceneManager.LoadScene("MainMenu");
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
     //loads gameover scene
     public static void GameOver()
