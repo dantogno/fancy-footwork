@@ -13,7 +13,7 @@ public class EndOfSecondHallTrigger : MonoBehaviour
     private float lightDelay = 1.0f;
 
     [SerializeField]
-    private Light[] secondHallLights = new Light[8];
+    private Light[] secondHallLights = new Light[3];
 
     [SerializeField]
     private AudioClip lightsOff, lightsOn;
@@ -83,7 +83,7 @@ public class EndOfSecondHallTrigger : MonoBehaviour
     {
         audioSource.PlayOneShot(lightsOff);
 
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < 3; i++)
         {
             secondHallLights[i].intensity = 0.0f;
         }

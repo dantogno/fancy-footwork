@@ -6,25 +6,28 @@ using UnityEngine;
 public class FirstTrigger : MonoBehaviour
 {
     [SerializeField]
-    private Light light1, light2, backLight, spotLight;
+    private Light light1, light2, backLight, spotLight, tvLight;
 
     [SerializeField]
     private AudioClip lightsOff, lightsOn, laugh, firstVideo;
 
     [SerializeField]
-    private float delay1 = 1.0f, delay2 = 1.0f, stutterDelay = 0.1f;
+    private float delay1 = 1.0f, delay2 = 1.0f, stutterDelay = 0.1f, tvFlickerIntensity = 1.0f, tvFlickerDelay = 0.1f;
 
     [SerializeField]
     private GameObject objectToActivate, ghostFigure;
 
     private MeshCollider triggerCollider;
     private bool hasBeenTriggered = false;
+    private bool shouldFlicker = false;
     private AudioSource audioSource;
+    private float tvClipLength;
 
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
         triggerCollider = GetComponent<MeshCollider>();
+        tvClipLength = firstVideo.length;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -46,12 +49,12 @@ public class FirstTrigger : MonoBehaviour
         yield return new WaitForSeconds(delay1);
         ghostFigure.SetActive(true);
         audioSource.PlayOneShot(lightsOn, 1.0f);
-        backLight.intensity = 1.0f;
+        backLight.intensity = 2.0f;
         yield return new WaitForSeconds(stutterDelay);
         audioSource.PlayOneShot(lightsOff, 1.0f);
         backLight.intensity = 0.0f;
         yield return new WaitForSeconds(stutterDelay);
-        backLight.intensity = 1.0f;
+        backLight.intensity = 2.0f;
         audioSource.PlayOneShot(lightsOn, 1.0f);
         objectToActivate.SetActive(true);
         yield return new WaitForSeconds(stutterDelay);
@@ -59,11 +62,27 @@ public class FirstTrigger : MonoBehaviour
         backLight.intensity = 0.0f;
         ghostFigure.SetActive(false);
         yield return new WaitForSeconds(delay2);
-        spotLight.intensity = 3.0f;
+        spotLight.intensity = 4.0f;
         light1.intensity = 0.2f;
         audioSource.PlayOneShot(lightsOn, 1.0f);
         audioSource.PlayOneShot(laugh, 1.0f);
         yield return new WaitForSeconds(delay1);
+        shouldFlicker = true;
         audioSource.PlayOneShot(firstVideo);
+        StartCoroutine(TVFlicker());
+        yield return new WaitForSeconds(tvClipLength);
+        shouldFlicker = false;
+    }
+
+    IEnumerator TVFlicker()
+    {
+        if (shouldFlicker)
+        {
+            tvLight.intensity = tvFlickerIntensity;
+            yield return new WaitForSeconds(tvFlickerDelay);
+            tvLight.intensity = 0.0f;
+            yield return new WaitForSeconds(tvFlickerDelay);
+            StartCoroutine(TVFlicker());
+        }
     }
 }

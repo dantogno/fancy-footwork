@@ -10,7 +10,7 @@ public class SecondTrigger : MonoBehaviour
     private Light[] firstHallLights = new Light[6];
 
     [SerializeField]
-    private Light[] secondHallLights = new Light[8];
+    private Light[] secondHallLights = new Light[6];
 
     [SerializeField]
     private GameObject doorToSlam;
@@ -24,7 +24,7 @@ public class SecondTrigger : MonoBehaviour
     [SerializeField]
     private AudioClip lightsOff, doorSlam;
 
-    private float[] secondHallLightsIntensity = new float[8];
+    private float[] secondHallLightsIntensity = new float[6];
     private MeshCollider triggerCollider;
     private bool hasBeenTriggered = false;
     private AudioSource audioSource;
@@ -50,7 +50,7 @@ public class SecondTrigger : MonoBehaviour
 
     private void GetLightIntensity()
     {
-        for (int k = 0; k < 8; k++)
+        for (int k = 0; k < 6; k++)
         {
             secondHallLightsIntensity[k] = secondHallLights[k].intensity;
             secondHallLights[k].intensity = 0.0f;
@@ -76,7 +76,7 @@ public class SecondTrigger : MonoBehaviour
             firstHallLights[i].intensity = 0.0f;
         }
 
-        for (int j = 0; j < 8; j++)
+        for (int j = 0; j < 6; j++)
         {
             secondHallLights[j].intensity = secondHallLightsIntensity[j];
         }
